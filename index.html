@@ -32,8 +32,8 @@
 html,body{margin:0;padding:0;min-height:100%}
 body{
   background:
-    radial-gradient(1100px 520px at 100% -8%, rgba(107,75,224,.10), transparent 60%),
-    radial-gradient(900px 480px at -10% 0%, rgba(46,116,210,.10), transparent 55%),
+    radial-gradient(1100px 520px at 100% -8%, var(--glow1), transparent 60%),
+    radial-gradient(900px 480px at -10% 0%, var(--glow2), transparent 55%),
     var(--paper);
   color:var(--ink-900);
   font-family:"Rubik","Segoe UI",Tahoma,sans-serif;
@@ -48,6 +48,156 @@ input,select{font-family:inherit;font-size:inherit}
 :focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:6px}
 h1,h2,h3{letter-spacing:-.03em;line-height:1.35;margin:0}
 
+
+/* ================= لوحات الألوان ================= */
+:root{--glow1:rgba(107,75,224,.10);--glow2:rgba(46,116,210,.10)}
+html[data-palette="bakery"]{
+  --ink-900:#7C1122; --ink-800:#8E1626; --ink-700:#A81E33; --ink-500:#A2666E; --ink-300:#CBA4A9;
+  --paper:#FAEEDD; --paper-2:#F8E0E3; --card:#FFFFFF; --line:#F1D8DC;
+  --mark:#F4B8C1; --mark-deep:#A81E33; --mark-soft:#FCEAEC;
+  --glow1:rgba(168,30,51,.14); --glow2:rgba(240,200,150,.30);
+  --sh-mark:0 6px 18px rgba(168,30,51,.22);
+  --sh-1:0 1px 2px rgba(124,17,34,.06), 0 2px 10px rgba(124,17,34,.06);
+  --sh-2:0 6px 14px rgba(124,17,34,.08), 0 16px 36px rgba(124,17,34,.10);
+}
+html[data-theme="dark"][data-palette="bakery"]{ --paper:#190A0D; --paper-2:#241014; --card:#2B1219; --line:#48222B; --mark-soft:#3B171E; --ink-900:#FBEFEF; --ink-800:#F2DDDF; --ink-700:#E3C3C7; --ink-500:#BC9298; --ink-300:#8E6A70; }
+html[data-palette="plum"]{
+  --ink-900:#2A1028; --ink-800:#3A1838; --ink-700:#55214C; --ink-500:#7E5476; --ink-300:#B392AC;
+  --paper:#FBF2F7; --paper-2:#F2E2EC; --card:#FFFFFF; --line:#EBD7E4;
+  --mark:#F7A8C4; --mark-deep:#B03A6E; --mark-soft:#FCE6EF;
+  --glow1:rgba(176,58,110,.13); --glow2:rgba(247,168,196,.16);
+  --sh-mark:0 6px 18px rgba(176,58,110,.25);
+}
+html[data-theme="dark"][data-palette="plum"]{ --paper:#12060F; --paper-2:#1C0A18; --card:#25102052; --card:#241021; --line:#3E1C38; --mark-soft:#3A1029; }
+html[data-palette="emerald"]{
+  --ink-900:#072720; --ink-800:#0C3A2F; --ink-700:#125243; --ink-500:#48776A; --ink-300:#8FB0A5;
+  --paper:#F0F7F3; --paper-2:#E0EFE7; --card:#FFFFFF; --line:#D5E8DF;
+  --mark:#F3C64E; --mark-deep:#9C7400; --mark-soft:#FBF0D2;
+  --glow1:rgba(18,82,67,.12); --glow2:rgba(243,198,78,.16);
+  --sh-mark:0 6px 18px rgba(156,116,0,.25);
+}
+html[data-theme="dark"][data-palette="emerald"]{ --paper:#05140F; --paper-2:#0A1F19; --card:#0E2A22; --line:#1E4438; --mark-soft:#33290B; }
+html[data-palette="violet"]{
+  --ink-900:#1B1038; --ink-800:#261650; --ink-700:#392270; --ink-500:#6A5C9B; --ink-300:#A79ECB;
+  --paper:#F5F3FD; --paper-2:#E9E4F9; --card:#FFFFFF; --line:#E0DAF4;
+  --mark:#FFB088; --mark-deep:#C2552B; --mark-soft:#FFE9DD;
+  --glow1:rgba(57,34,112,.14); --glow2:rgba(255,176,136,.18);
+  --sh-mark:0 6px 18px rgba(194,85,43,.24);
+}
+html[data-theme="dark"][data-palette="violet"]{ --paper:#0A0619; --paper-2:#120B28; --card:#181035; --line:#2C1F55; --mark-soft:#3A2115; }
+html[data-palette="ocean"]{
+  --ink-900:#062430; --ink-800:#0A3442; --ink-700:#0F4B5E; --ink-500:#437687; --ink-300:#8FB3BF;
+  --paper:#EFF6F9; --paper-2:#DDECF2; --card:#FFFFFF; --line:#D2E6EE;
+  --mark:#FF9A76; --mark-deep:#C2492A; --mark-soft:#FFE6DC;
+  --glow1:rgba(15,75,94,.13); --glow2:rgba(255,154,118,.16);
+  --sh-mark:0 6px 18px rgba(194,73,42,.24);
+}
+html[data-theme="dark"][data-palette="ocean"]{ --paper:#04151C; --paper-2:#08222C; --card:#0B2C39; --line:#164457; --mark-soft:#3A1E15; }
+/* لمسة تصميم الثيم القرمزي: لوح داخلي وردي فوق خلفية كريمية */
+html[data-palette="bakery"] main{background:var(--paper-2);border-radius:26px;padding:22px 18px 60px;margin-top:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+html[data-palette="bakery"] .nav-in{background:var(--card)}
+html[data-palette="bakery"] .appbar{border-bottom-color:var(--line)}
+@media (max-width:520px){ html[data-palette="bakery"] main{border-radius:20px;padding:16px 12px 40px} }
+
+
+/* ================= هيكل الصفحة الرئيسية ================= */
+.searchwrap{position:relative;flex:1;max-width:300px;min-width:130px}
+.topsearch{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r-pill);
+  padding:8px 34px 8px 16px;color:var(--ink-900);font-size:.86rem}
+.topsearch:focus{outline:none;border-color:var(--ink-700)}
+.searchwrap .ic{position:absolute;inset-inline-end:12px;top:50%;transform:translateY(-50%);font-size:.82rem;opacity:.55;pointer-events:none}
+.searchres{position:absolute;top:44px;inset-inline-start:0;inset-inline-end:0;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-m);box-shadow:var(--sh-2);max-height:330px;overflow:auto;z-index:80;display:none;padding:6px}
+.searchres.open{display:block}
+.sres{display:block;width:100%;text-align:right;background:none;border:0;padding:9px 12px;border-radius:10px;font-size:.86rem}
+.sres:hover{background:var(--paper-2)}
+.sres b{display:block;font-family:"Lora",serif;direction:ltr;text-align:right}
+.sres span{font-size:.75rem;color:var(--ink-500)}
+@media (max-width:700px){ .searchwrap{order:9;max-width:100%;flex-basis:100%} }
+
+.banner{position:relative;overflow:hidden;border-radius:var(--r-l);padding:26px;margin-bottom:20px;color:#fff;
+  background:linear-gradient(120deg,var(--ink-900) 15%,var(--ink-700) 75%);
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;box-shadow:var(--sh-2)}
+.banner::before{content:"";position:absolute;inset:0;opacity:.3;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);background-size:20px 20px}
+.bmain{flex:1;min-width:230px;position:relative}
+.bmain h1{font-size:1.85rem;line-height:1.3;margin-bottom:8px;letter-spacing:-.04em}
+.bmain h1 em{font-family:"Lora",Georgia,serif;font-style:italic;color:var(--mark);display:block;font-size:1.45rem}
+.bmain p{margin:0;color:rgba(255,255,255,.78);font-size:.92rem;max-width:44ch}
+.offer{display:inline-flex;align-items:center;gap:8px;background:var(--mark);color:#2B0A12;border-radius:var(--r-pill);
+  padding:7px 18px;font-weight:700;font-size:.88rem;margin-top:14px;box-shadow:var(--sh-mark)}
+.bcircle{width:148px;height:148px;border-radius:50%;background:var(--card);border:6px solid rgba(255,255,255,.85);
+  display:grid;place-items:center;flex:none;position:relative;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.bmini{display:flex;flex-direction:column;gap:12px;position:relative}
+.bmini div{width:72px;height:72px;border-radius:50%;background:var(--card);border:4px solid rgba(255,255,255,.85);
+  display:grid;place-items:center;font-size:1.45rem;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+@media (max-width:640px){ .bcircle{width:112px;height:112px} .bmini{flex-direction:row} .bmini div{width:58px;height:58px;font-size:1.2rem} .bmain h1{font-size:1.45rem} .bmain h1 em{font-size:1.12rem} }
+
+.sechead{display:flex;align-items:flex-end;gap:12px;margin:28px 0 14px;flex-wrap:wrap}
+.sechead h2{font-size:1.42rem;letter-spacing:-.03em}
+.sechead .ar{font-size:.85rem;color:var(--ink-500);margin-inline-end:auto}
+.sechead .more{background:var(--ink-900);color:var(--paper);border:0;border-radius:var(--r-pill);padding:7px 18px;font-size:.8rem;font-weight:600}
+[data-theme="dark"] .sechead .more{background:var(--mark);color:#2B1219}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 10px;text-align:center;box-shadow:var(--sh-1);transition:transform .18s,box-shadow .18s}
+.cat:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--ink-500)}
+.cat .ic{width:52px;height:52px;border-radius:16px;background:var(--mark-soft);display:grid;place-items:center;font-size:1.4rem;margin:0 auto 8px}
+.cat .nm{font-family:"Lora",serif;direction:ltr;font-size:.9rem;font-weight:600}
+.cat .sub{font-size:.73rem;color:var(--ink-500)}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:18px 12px;box-shadow:var(--sh-1);margin-bottom:14px}
+.feat{text-align:center}
+.feat .circ{width:56px;height:56px;border-radius:50%;border:2px solid var(--mark);display:grid;place-items:center;
+  margin:0 auto 7px;font-family:"Space Grotesk";font-weight:700;font-size:.9rem;color:var(--ink-900)}
+.feat .lb{font-size:.7rem;color:var(--ink-500);line-height:1.5}
+.ticket{background:var(--mark-soft);border:1.5px dashed var(--mark-deep);border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.ticket .tic{font-size:1.9rem}
+.ticket .tx{flex:1;min-width:150px}
+.ticket .tx b{display:block;font-size:1.02rem;margin-bottom:2px}
+.ticket .tx span{font-size:.8rem;color:var(--ink-500)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media (max-width:820px){ .two{grid-template-columns:1fr} .feats{grid-template-columns:repeat(2,1fr);gap:14px} }
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{border-radius:18px;padding:16px;min-height:112px;display:flex;flex-direction:column;justify-content:space-between;
+  text-align:right;background:linear-gradient(140deg,var(--ink-900),var(--ink-700));color:#fff;border:0;box-shadow:var(--sh-1);transition:transform .18s,box-shadow .18s}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.tile .ic{font-size:1.45rem}
+.tile .nm{font-family:"Lora",serif;direction:ltr;text-align:right;font-weight:600;font-size:.95rem}
+.tile .sb{font-size:.75rem;opacity:.82}
+.tile.light{background:var(--card);color:var(--ink-900);border:1px solid var(--line)}
+.tile.light .sb{color:var(--ink-500);opacity:1}
+.ctabar{background:linear-gradient(135deg,var(--ink-900),var(--ink-700));color:#fff;border-radius:20px;padding:20px 24px;
+  text-align:center;font-weight:600;font-size:1rem;margin:26px 0 10px;box-shadow:var(--sh-2)}
+.ctabar span{display:block;font-size:.8rem;opacity:.8;font-weight:400;margin-top:4px}
+footer.site{max-width:1120px;margin:0 auto;padding:22px 16px 90px}
+footer.site .fin{background:var(--card);border:1px solid var(--line);border-radius:var(--r-l);padding:24px;box-shadow:var(--sh-1)}
+footer.site .brandf{font-weight:700;font-size:1.2rem;margin-bottom:14px}
+.fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:18px}
+.fcol h4{font-size:.75rem;letter-spacing:.06em;color:var(--ink-500);margin-bottom:8px}
+.fcol button{display:block;background:none;border:0;padding:3px 0;font-size:.85rem;color:var(--ink-800);text-align:right}
+.fcol button:hover{color:var(--mark-deep)}
+.fnote{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:.77rem;color:var(--ink-500);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+
+svg.i{width:1.08em;height:1.08em;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.16em;flex:none;display:inline-block}
+.navbtn .ic svg.i,.cat .ic svg.i,.tile .ic svg.i,.big-ic svg.i{width:1em;height:1em;stroke-width:1.6}
+.bmini svg.i{width:1.5rem;height:1.5rem}
+.bdg .ic svg.i{width:1.15rem;height:1.15rem}
+.spk svg.i,.iconbtn svg.i{width:1.05rem;height:1.05rem}
+.ticket .tic svg.i{width:1.9rem;height:1.9rem;stroke-width:1.4}
+.btn svg.i,.pctl svg.i,.pbig svg.i,.fbtn svg.i{margin-inline-end:5px}
+
+/* منتقي الثيم */
+.palbox{position:absolute;top:56px;inset-inline-start:14px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-m);padding:10px;box-shadow:var(--sh-2);z-index:75;display:none;min-width:212px}
+.palbox.open{display:block}
+.palbox .hd{font-size:.76rem;color:var(--ink-500);padding:2px 8px 8px}
+.pal{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1.5px solid transparent;
+  background:none;width:100%;text-align:right;font-size:.88rem}
+.pal:hover{background:var(--paper)}
+.pal[aria-pressed="true"]{border-color:var(--ink-900);background:var(--paper)}
+.dots{display:flex;gap:3px}
+.dots i{width:15px;height:15px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
+
 /* ================= الشريط العلوي ================= */
 .appbar{
   position:sticky;top:0;z-index:60;
@@ -56,7 +206,7 @@ h1,h2,h3{letter-spacing:-.03em;line-height:1.35;margin:0}
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
 }
-.appbar-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.appbar-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;position:relative}
 .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.02rem;white-space:nowrap}
 .brand .dot{width:30px;height:30px;border-radius:9px;background:var(--ink-900);color:var(--mark);display:grid;place-items:center;font-family:"Space Grotesk";font-size:.95rem;box-shadow:var(--sh-1)}
 [data-theme="dark"] .brand .dot{background:var(--mark);color:var(--ink-900)}
@@ -77,7 +227,7 @@ h1,h2,h3{letter-spacing:-.03em;line-height:1.35;margin:0}
 .navbtn{flex:1;background:none;border:0;border-radius:var(--r-pill);padding:8px 14px;font-size:.9rem;font-weight:500;color:var(--ink-500);white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px}
 .navbtn:hover{color:var(--ink-900)}
 .navbtn[aria-selected="true"]{background:var(--ink-900);color:var(--paper);box-shadow:var(--sh-1)}
-[data-theme="dark"] .navbtn[aria-selected="true"]{background:var(--mark);color:#0D1526}
+[data-theme="dark"] .navbtn[aria-selected="true"]{background:var(--mark);color:#2B1219}
 .navbtn .ic{font-size:1rem;line-height:1}
 @media (max-width:720px){
   :root{--nav-h:78px}
@@ -100,8 +250,9 @@ h2.title{font-size:1.5rem;margin:0 0 6px}
   background:linear-gradient(140deg, var(--ink-900), var(--ink-700) 70%, #2A3D6B);
   color:#fff;box-shadow:var(--sh-2);
 }
+.hero::before{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);background-size:18px 18px;pointer-events:none}
 .hero::after{content:"";position:absolute;inset:auto -60px -120px auto;width:320px;height:320px;border-radius:50%;
-  background:radial-gradient(circle, rgba(255,213,74,.28), transparent 62%)}
+  background:radial-gradient(circle, color-mix(in srgb, var(--mark) 45%, transparent), transparent 62%)}
 .hero-grid{position:relative;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 .hero h1{font-size:1.75rem;margin-bottom:8px;max-width:22ch}
 .hero p{margin:0;color:#B9C6E2;font-size:.94rem;max-width:52ch}
@@ -117,7 +268,7 @@ h2.title{font-size:1.5rem;margin:0 0 6px}
 .btn{background:var(--ink-900);color:var(--paper);border:0;border-radius:var(--r-pill);padding:10px 22px;font-weight:600;font-size:.94rem;box-shadow:var(--sh-1);display:inline-flex;align-items:center;gap:8px}
 .btn:hover{filter:brightness(1.12)}
 .btn:disabled{opacity:.45;cursor:default;filter:none}
-.btn.mark{background:var(--mark);color:#1A1300;box-shadow:var(--sh-mark)}
+.btn.mark{background:linear-gradient(135deg, var(--mark), color-mix(in srgb, var(--mark) 72%, var(--mark-deep)));color:#1A1300;box-shadow:var(--sh-mark)}
 .btn.ghost{background:transparent;color:var(--ink-900);border:1.5px solid var(--line);box-shadow:none}
 .btn.ghost:hover{border-color:var(--ink-500);filter:none}
 .btn.sm{padding:6px 14px;font-size:.84rem}
@@ -154,7 +305,8 @@ h2.title{font-size:1.5rem;margin:0 0 6px}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:18px;box-shadow:var(--sh-1)}
 button.card{text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
-button.card:hover{border-color:var(--ink-500);box-shadow:var(--sh-2)}
+button.card{transition:transform .18s, box-shadow .18s, border-color .18s}
+button.card:hover{border-color:var(--ink-500);box-shadow:var(--sh-2);transform:translateY(-2px)}
 .card .t{font-weight:600;font-size:1.02rem}
 .card .t-en{font-family:"Lora",serif;direction:ltr;color:var(--ink-500);font-size:.86rem}
 .card .m{font-size:.82rem;color:var(--ink-500)}
@@ -174,6 +326,11 @@ button.card:hover{border-color:var(--ink-500);box-shadow:var(--sh-2)}
 .back:hover{color:var(--ink-900)}
 .lesson-head{background:linear-gradient(140deg,var(--ink-900),var(--ink-700));color:#fff;border-radius:var(--r-l) var(--r-l) 0 0;padding:22px 24px}
 .lesson-head h2{font-size:1.42rem;margin:8px 0 2px}
+.lesson-head h2.en-h{font-family:"Lora",Georgia,serif;direction:ltr;text-align:right;font-size:1.5rem}
+.sub-ar{color:var(--mark);font-size:.95rem;margin:2px 0 0}
+.en-t{font-family:"Lora",Georgia,serif;direction:ltr;text-align:right;font-size:1.02rem}
+.t-ar{font-size:.85rem;color:var(--ink-500)}
+.ar-sub{font-family:"Rubik",sans-serif;direction:rtl;text-align:right;font-size:.82rem;color:var(--ink-500)}
 .lesson-head .sub-en{font-family:"Lora",serif;direction:ltr;text-align:right;color:var(--mark);font-size:1rem;margin:0}
 .panel{background:var(--card);border:1px solid var(--line);border-top:0;border-radius:0 0 var(--r-l) var(--r-l);padding:22px 24px;margin-bottom:26px;box-shadow:var(--sh-1)}
 .panel h3{font-size:1.04rem;margin:26px 0 12px;display:flex;align-items:center;gap:9px}
@@ -343,7 +500,7 @@ input.gap:focus{border-color:var(--mark-deep);outline:none;background:var(--mark
 .timer .t{font-family:"Space Grotesk";font-size:2rem;line-height:1}
 .timer.low .t{color:var(--no)}
 .bar{flex:1;height:9px;border-radius:9px;background:var(--paper-2);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--mark);transition:width .9s linear}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--mark),var(--mark-deep));transition:width .9s linear}
 .streakline{font-size:.8rem;color:var(--ink-500)}
 
 /* ================= النتيجة والشارات ================= */
@@ -407,24 +564,31 @@ input.gap:focus{border-color:var(--mark-deep);outline:none;background:var(--mark
 <body>
 <header class="appbar"><div class="appbar-in">
   <div class="brand"><span class="dot">TH</span> Teacher Huda</div>
+  <div class="searchwrap">
+    <input class="topsearch" id="topSearch" placeholder="Search lessons, words, texts…" autocomplete="off">
+    <span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.3-4.3'/></svg></span>
+    <div class="searchres" id="searchRes"></div>
+  </div>
   <div class="spacer"></div>
-  <button class="chip who" id="whoBtn" title="تبديل الطالبة">👤 <b id="whoName">ضيف</b></button>
-  <div class="chip xp"><span>⚡</span><b id="xpNum">0</b><span>XP</span></div>
-  <div class="chip fire"><span>🔥</span><b id="strNum">0</b></div>
-  <button class="iconbtn" id="sndBtn" aria-pressed="true" title="الصوت">🔊</button>
-  <button class="iconbtn" id="thmBtn" title="الوضع الليلي">🌙</button>
+  <button class="chip who" id="whoBtn" title="تبديل الطالبة"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 21a8 8 0 0 0-16 0M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z'/></svg> <b id="whoName">ضيف</b></button>
+  <div class="chip xp"><span><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M13 2 4 14h7l-1 8 9-12h-7z'/></svg></span><b id="xpNum">0</b><span>XP</span></div>
+  <div class="chip fire"><span><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9-2 1.5-2.5 4-2.5 4S11 8 9 6c-1 3-4 5-4 9.5C5 19.3 8 22 12 22z'/></svg></span><b id="strNum">0</b></div>
+  <button class="iconbtn" id="sndBtn" aria-pressed="true" title="الصوت"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg></button>
+  <button class="iconbtn" id="palBtn" title="تغيير الثيم"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.6-.2-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2a5 5 0 0 0 5-5c0-3.9-4-6.3-10-6.3zM7.5 11.5h.01M10 7.5h.01M14.5 7.5h.01'/></svg></button>
+  <button class="iconbtn" id="thmBtn" title="الوضع الليلي"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z'/></svg></button>
+  <div class="palbox" id="palBox"></div>
 </div></header>
 
 <nav class="nav"><div class="nav-in" role="tablist">
-  <button class="navbtn" role="tab" aria-selected="true" data-v="home"><span class="ic">🏠</span>البداية</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="lessons"><span class="ic">📘</span>الدروس</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="vocab"><span class="ic">🗂️</span>المفردات</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="read"><span class="ic">📖</span>القراءة</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="drill"><span class="ic">⚡</span>تدريب</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="shadow"><span class="ic">🗣️</span>النطق</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="step"><span class="ic">🎓</span>ستيب</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="test"><span class="ic">🎯</span>اختبارات</button>
-  <button class="navbtn" role="tab" aria-selected="false" data-v="prog"><span class="ic">📊</span>تقدمي</button>
+  <button class="navbtn" role="tab" aria-selected="true" data-v="home"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'/></svg></span>Home</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="lessons"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 4H8a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h13zM5 20a2 2 0 0 0 2 2h13'/></svg></span>Lessons</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="vocab"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2 2 7l10 5 10-5zM2 12l10 5 10-5M2 17l10 5 10-5'/></svg></span>Vocabulary</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="read"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 6s-2-2-6-2H3v14h3c4 0 6 2 6 2s2-2 6-2h3V4h-3c-4 0-6 2-6 2zM12 6v14'/></svg></span>Reading</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="drill"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M13 2 4 14h7l-1 8 9-12h-7z'/></svg></span>Practice</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="shadow"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg></span>Speaking</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="step"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M2 8l10-5 10 5-10 5zM6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5'/></svg></span>STEP</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="test"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/></svg></span>Tests</button>
+  <button class="navbtn" role="tab" aria-selected="false" data-v="prog"><span class="ic"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 20v-6M12 20V6M19 20v-10M3 20h18'/></svg></span>Progress</button>
 </div></nav>
 
 <main>
@@ -442,7 +606,7 @@ input.gap:focus{border-color:var(--mark-deep);outline:none;background:var(--mark
 <div class="gate" id="gate" hidden>
   <div class="gate-card">
     <div class="gate-brand"><span class="dot">TH</span> Teacher Huda</div>
-    <h2>مرحبًا بك 👋</h2>
+    <h2>مرحبًا بك <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 17l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z'/></svg></h2>
     <p class="gate-sub">سجّلي اسمك مرة واحدة، ويُحفظ تقدمك على هذا الجهاز تلقائيًا — نقاطك، دروسك المكتملة، وأخطاؤك.</p>
     <div id="gateList"></div>
     <input class="gate-in" id="gName" placeholder="الاسم الكامل" autocomplete="off">
@@ -451,7 +615,21 @@ input.gap:focus{border-color:var(--mark-deep);outline:none;background:var(--mark
     <p class="gate-note" id="gateNote"></p>
   </div>
 </div>
-<button class="fab" id="fab">🧺 صندوق أخطائي <b id="fabN">0</b></button>
+<footer class="site"><div class="fin">
+  <div class="brandf">Teacher Huda</div>
+  <div class="fcols">
+    <div class="fcol"><h4>LEARN</h4>
+      <button data-go="lessons">Grammar Lessons</button><button data-go="vocab">Vocabulary</button><button data-go="read">Reading</button><button data-go="shadow">Speaking</button></div>
+    <div class="fcol"><h4>PRACTICE</h4>
+      <button data-go="drill">Intensive Practice</button><button data-go="test">Graded Tests</button><button data-go="step">STEP Exam</button><button data-act="minute">One-Minute Challenge</button></div>
+    <div class="fcol"><h4>MY SPACE</h4>
+      <button data-go="prog">My Progress</button><button data-act="review">My Mistakes Box</button><button data-act="report">Send Report</button><button data-act="switch">Switch Student</button></div>
+    <div class="fcol"><h4>TEACHER</h4>
+      <button data-act="teacher">Teacher Dashboard</button><button data-act="worksheet">Printable Worksheet</button><button data-act="top">↑ Back to top</button></div>
+  </div>
+  <div class="fnote"><span>كل التدريبات والتصحيح داخل الموقع — يعمل بدون إنترنت بعد فتحه.</span><span id="fCount"></span></div>
+</div></footer>
+<button class="fab" id="fab"><svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 12h-6l-2 3h-4l-2-3H2M5 5h14l3 7v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z'/></svg> صندوق أخطائي <b id="fabN">0</b></button>
 <div class="toasts" id="toasts"></div>
 <div class="sheet" id="sheet"><div class="sheet-in" id="sheetIn"></div></div>
 <script>
@@ -997,7 +1175,8 @@ LESSONS.push(
 
 {id:"L28",lvl:"B2",t:"Non-defining relative clauses",ta:"جمل الوصل غير المعرِّفة",
  intro:"الجملة المعرِّفة ضرورية لتحديد الاسم، وغير المعرِّفة تضيف معلومة إضافية بين فاصلتين ويمكن حذفها دون فقدان المعنى.",
- pts:["غير المعرِّفة توضع بين <span class='hl'>فاصلتين</span> ولا تستخدم <span class='en'>that</span> أبدًا.",      "لا يجوز حذف ضمير الوصل في غير المعرِّفة: <span class='en'>My uncle, who lives in Jeddah, is a pilot.</span>",
+ pts:["غير المعرِّفة توضع بين <span class='hl'>فاصلتين</span> ولا تستخدم <span class='en'>that</span> أبدًا.",
+      "لا يجوز حذف ضمير الوصل في غير المعرِّفة: <span class='en'>My uncle, who lives in Jeddah, is a pilot.</span>",
       "في المعرِّفة يجوز حذف الضمير إذا كان مفعولًا: <span class='en'>The book (that) I read…</span>",
       "حرف الجر في الأسلوب الرسمي يسبق الضمير: <span class='en'>the person to whom I spoke</span>."],
  form:{head:["النوع","الشكل","مثال"],rows:[["معرِّفة","بدون فواصل، تقبل that","The student who won is my friend."],["غير معرِّفة","بين فاصلتين، بدون that","Ali, who won the prize, is my friend."],["إشارة للجملة كلها","which","He failed, which surprised everyone."]]},
@@ -1996,7 +2175,8 @@ L19:[
  {t:"ord",w:["which","This","the","is","car","I","want"],a:"This is the car which I want",e:"which بعد car."},
  {t:"ord",w:["where","This","the","is","we","live","town"],a:"This is the town where we live",e:"where بعد town."}],
 L20:[
- {t:"mcq",q:"“I am tired,” he said. → He said he ___ tired.",o:["is","was","were","has"],a:1,e:"am ← was."}, {t:"mcq",q:"“I will come,” she said. → She said she ___ come.",o:["will","would","can","is"],a:1,e:"will ← would."},
+ {t:"mcq",q:"“I am tired,” he said. → He said he ___ tired.",o:["is","was","were","has"],a:1,e:"am ← was."},
+ {t:"mcq",q:"“I will come,” she said. → She said she ___ come.",o:["will","would","can","is"],a:1,e:"will ← would."},
  {t:"mcq",q:"“We are playing,” they said. → They said they ___ playing.",o:["are","were","was","is"],a:1,e:"are ← were."},
  {t:"mcq",q:"“Do you like tea?” he asked. → He asked if I ___ tea.",o:["like","liked","likes","am like"],a:1,e:"مضارع ← ماضٍ."},
  {t:"mcq",q:"“I can drive,” she said. → She said she ___ drive.",o:["can","could","will","may"],a:1,e:"can ← could."},
@@ -2718,24 +2898,24 @@ const state = {
   stats:{}, qdone:{}, review:[], badges:{}, vocabCount:0, bestMinute:0,
   goal:20, test:null, minute:null
 };
-const LEVELS=[[0,"مبتدئ"],[200,"متدرّب"],[500,"متقدّم"],[1000,"محترف"],[2000,"خبير"]];
-function levelName(){let n="مبتدئ"; LEVELS.forEach(([x,t])=>{if(state.xp>=x)n=t;}); return n;}
+const LEVELS=[[0,"Beginner"],[200,"Learner"],[500,"Advanced"],[1000,"Pro"],[2000,"Expert"]];
+function levelName(){let n="Beginner"; LEVELS.forEach(([x,t])=>{if(state.xp>=x)n=t;}); return n;}
 
 const BADGES=[
- {id:"first", ic:"🌱", n:"أول خطوة", d:"أجب عن أول سؤال", chk:s=>s.answered>=1},
- {id:"ten",   ic:"✅", n:"عشر صحيحة", d:"10 إجابات صحيحة", chk:s=>s.right>=10},
- {id:"fifty", ic:"🏅", n:"خمسون صحيحة", d:"50 إجابة صحيحة", chk:s=>s.right>=50},
- {id:"hund",  ic:"👑", n:"المئة", d:"100 إجابة صحيحة", chk:s=>s.right>=100},
- {id:"str5",  ic:"🔥", n:"سلسلة خماسية", d:"5 إجابات صحيحة متتالية", chk:s=>s.best>=5},
- {id:"str10", ic:"🌟", n:"سلسلة عشرية", d:"10 إجابات صحيحة متتالية", chk:s=>s.best>=10},
- {id:"lesson",ic:"📘", n:"درس مكتمل", d:"أنهِ كل تدريبات درس", chk:s=>LESSONS.some(L=>L.q.every((q,i)=>s.qdone[L.id+"-"+i]))},
- {id:"vocab", ic:"🗂️", n:"جامع الكلمات", d:"30 سؤال مفردات", chk:s=>s.vocabCount>=30},
- {id:"goal",  ic:"🎯", n:"هدف اليوم", d:"حل 20 سؤالًا", chk:s=>s.answered>=20},
- {id:"speed", ic:"⚡", n:"سريع البديهة", d:"12 إجابة في تحدي الدقيقة", chk:s=>s.bestMinute>=12},
- {id:"perfect",ic:"💎", n:"العلامة الكاملة", d:"100% في أي اختبار", chk:s=>s.perfectTest},
- {id:"b2",    ic:"🚀", n:"عبور إلى B2", d:"أكمل تدريبات درس من B2", chk:s=>LESSONS.some(L=>L.lvl==="B2"&&L.q.every((q,i)=>s.qdone[L.id+"-"+i]))},
- {id:"reader",ic:"📖", n:"قارئ متمكن", d:"أجب عن أسئلة نصّين", chk:s=>Object.keys(s.readDone||{}).length>=2},
- {id:"shadow",ic:"🗣️", n:"ظل المتحدث", d:"انطقي 20 جملة في Shadowing", chk:s=>(s.shCount||0)>=20}
+ {id:"first", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 21V11M12 11C12 7 9 5 5 5c0 4 3 6 7 6zM12 11c0-3 2-5 6-5 0 3-2 5-6 5z'/></svg>", n:"أول خطوة", d:"أجب عن أول سؤال", chk:s=>s.answered>=1},
+ {id:"ten",   ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg>", n:"عشر صحيحة", d:"10 إجابات صحيحة", chk:s=>s.right>=10},
+ {id:"fifty", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM8.2 13.5 7 22l5-3 5 3-1.2-8.5'/></svg>", n:"خمسون صحيحة", d:"50 إجابة صحيحة", chk:s=>s.right>=50},
+ {id:"hund",  ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M3 7l4 4 5-7 5 7 4-4-2 12H5z'/></svg>", n:"المئة", d:"100 إجابة صحيحة", chk:s=>s.right>=100},
+ {id:"str5",  ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9-2 1.5-2.5 4-2.5 4S11 8 9 6c-1 3-4 5-4 9.5C5 19.3 8 22 12 22z'/></svg>", n:"سلسلة خماسية", d:"5 إجابات صحيحة متتالية", chk:s=>s.best>=5},
+ {id:"str10", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'/></svg>", n:"سلسلة عشرية", d:"10 إجابات صحيحة متتالية", chk:s=>s.best>=10},
+ {id:"lesson",ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 4H8a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h13zM5 20a2 2 0 0 0 2 2h13'/></svg>", n:"درس مكتمل", d:"أنهِ كل تدريبات درس", chk:s=>LESSONS.some(L=>L.q.every((q,i)=>s.qdone[L.id+"-"+i]))},
+ {id:"vocab", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2 2 7l10 5 10-5zM2 12l10 5 10-5M2 17l10 5 10-5'/></svg>", n:"جامع الكلمات", d:"30 سؤال مفردات", chk:s=>s.vocabCount>=30},
+ {id:"goal",  ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/></svg>", n:"هدف اليوم", d:"حل 20 سؤالًا", chk:s=>s.answered>=20},
+ {id:"speed", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M13 2 4 14h7l-1 8 9-12h-7z'/></svg>", n:"سريع البديهة", d:"12 إجابة في تحدي الدقيقة", chk:s=>s.bestMinute>=12},
+ {id:"perfect",ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 3h12l4 6-10 12L2 9zM2 9h20M12 3 8 9l4 12 4-12z'/></svg>", n:"العلامة الكاملة", d:"100% في أي اختبار", chk:s=>s.perfectTest},
+ {id:"b2",    ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2c.9-.9.9-2.2 0-3s-2.2-.9-3 0zM9 12l3-3a10 10 0 0 1 9-6 10 10 0 0 1-6 9l-3 3zM15 7.5h.01'/></svg>", n:"عبور إلى B2", d:"أكمل تدريبات درس من B2", chk:s=>LESSONS.some(L=>L.lvl==="B2"&&L.q.every((q,i)=>s.qdone[L.id+"-"+i]))},
+ {id:"reader",ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 6s-2-2-6-2H3v14h3c4 0 6 2 6 2s2-2 6-2h3V4h-3c-4 0-6 2-6 2zM12 6v14'/></svg>", n:"قارئ متمكن", d:"أجب عن أسئلة نصّين", chk:s=>Object.keys(s.readDone||{}).length>=2},
+ {id:"shadow",ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>", n:"ظل المتحدث", d:"انطقي 20 جملة في Shadowing", chk:s=>(s.shCount||0)>=20}
 ];
 
 /* ================= صوت ونطق ================= */
@@ -2767,17 +2947,17 @@ function speak(text, btn){
 }
 let SPK_ON=null;
 function spkBtn(text){
-  const b = el("button","spk","🔊"); b.type="button"; b.title="استمع للنطق (اضغط مرة أخرى للإيقاف)";
+  const b = el("button","spk","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"); b.type="button"; b.title="استمع للنطق (اضغط مرة أخرى للإيقاف)";
   b.setAttribute("aria-label","استمع للنطق");
   b.onclick=(e)=>{
     e.stopPropagation();
-    if(SPK_ON===b){ ttsKill(); b.classList.remove("playing"); b.textContent="🔊"; SPK_ON=null; return; }
-    if(SPK_ON){ SPK_ON.classList.remove("playing"); SPK_ON.textContent="🔊"; }
-    ttsKill(); SPK_ON=b; b.textContent="⏹";
+    if(SPK_ON===b){ ttsKill(); b.classList.remove("playing"); b.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"; SPK_ON=null; return; }
+    if(SPK_ON){ SPK_ON.classList.remove("playing"); SPK_ON.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"; }
+    ttsKill(); SPK_ON=b; b.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M7 7h10v10H7z'/></svg>";
     speak(text,b);
     const u=setInterval(()=>{
       let sp=false; try{ sp=speechSynthesis.speaking; }catch(err){}
-      if(!sp){ clearInterval(u); if(SPK_ON===b){ b.classList.remove("playing"); b.textContent="🔊"; SPK_ON=null; } }
+      if(!sp){ clearInterval(u); if(SPK_ON===b){ b.classList.remove("playing"); b.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"; SPK_ON=null; } }
     },400);
   };
   return b;
@@ -2809,13 +2989,13 @@ function makePlayer(text, opts){
   const bar=el("div","bar"); const fi=el("i"); fi.style.width="0%"; fi.style.transition="width .25s"; bar.appendChild(fi);
   const stat=el("div","pstat","جاهز للتشغيل");
   const btns=el("div","pbtns");
-  const play=el("button","pbig","▶ تشغيل");
-  const pause=el("button","pctl","⏸ إيقاف مؤقت"); pause.disabled=true;
-  const stop=el("button","pctl","⏹ إيقاف"); stop.disabled=true;
+  const play=el("button","pbig","<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M8 5v14l11-7z'/></svg> تشغيل");
+  const pause=el("button","pctl","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 5v14M15 5v14'/></svg> إيقاف مؤقت"); pause.disabled=true;
+  const stop=el("button","pctl","<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M7 7h10v10H7z'/></svg> إيقاف"); stop.disabled=true;
   btns.appendChild(play); btns.appendChild(pause); btns.appendChild(stop);
 
   const sp=el("div","speeds"); sp.appendChild(el("span","","السرعة:"));
-  const spBtns=[["🐢 بطيء",0.6],["عادي",0.85],["⚡ أسرع",1.05]].map(([lbl,val])=>{
+  const spBtns=[["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 15l4-4M3.5 17a9 9 0 1 1 17 0'/></svg> بطيء",0.6],["عادي",0.85],["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M13 2 4 14h7l-1 8 9-12h-7z'/></svg> أسرع",1.05]].map(([lbl,val])=>{
     const b=el("button","spd",lbl);
     b.setAttribute("aria-pressed",String(TTS_RATE===val));
     b.onclick=()=>{ TTS_RATE=val; spBtns.forEach(x=>x.setAttribute("aria-pressed",String(+x.dataset.v===val)));
@@ -2827,8 +3007,8 @@ function makePlayer(text, opts){
     play.disabled = playing && !paused;
     pause.disabled = !playing;
     stop.disabled = !playing;
-    pause.textContent = paused ? "▶ متابعة" : "⏸ إيقاف مؤقت";
-    play.textContent = playing ? "🔊 يعمل الآن" : (plays? "🔁 إعادة التشغيل" : "▶ تشغيل");
+    pause.innerHTML=paused ? "<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M8 5v14l11-7z'/></svg> متابعة" : "<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 5v14M15 5v14'/></svg> إيقاف مؤقت";
+    play.innerHTML = playing ? "<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg> يعمل الآن" : (plays? "<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3'/></svg> إعادة التشغيل" : "<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M8 5v14l11-7z'/></svg> تشغيل");
     if(opts.limit && plays>=opts.limit && !playing){ play.disabled=true; play.textContent="انتهت مرات الاستماع"; }
   }
   function reset(){
@@ -2906,7 +3086,7 @@ function checkBadges(){
     if(!state.badges[b.id] && b.chk(state)){
       state.badges[b.id]=true;
       beep("badge");
-      toast("🏆 شارة جديدة: "+b.n, true);
+      toast("<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3'/></svg> شارة جديدة: "+b.n, true);
     }
   });
 }
@@ -2918,7 +3098,7 @@ function record(key, ok, uid, opts){
   if(ok){
     state.right++; state.streak++; state.best=Math.max(state.best,state.streak);
     state.xp += (opts.hinted?5:10) + (state.streak%5===0?15:0);
-    if(state.streak%5===0 && state.streak>0) toast("🔥 سلسلة "+state.streak+" — مكافأة 15 XP", true);
+    if(state.streak%5===0 && state.streak>0) toast("<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9-2 1.5-2.5 4-2.5 4S11 8 9 6c-1 3-4 5-4 9.5C5 19.3 8 22 12 22z'/></svg> سلسلة "+state.streak+" — مكافأة 15 XP", true);
   } else { state.streak=0; }
   if(!state.stats[key]) state.stats[key]={r:0,w:0};
   state.stats[key][ok?"r":"w"]++;
@@ -2995,7 +3175,8 @@ function buildQ(q, meta){
     box.appendChild(el("div","qtext ar","رتّب الكلمات لتكوّن جملة صحيحة:"));
     const build = el("div","build"); const chips = el("div","chips");
     let chosen=[];
-    const chipEls = shuffle(q.w).map((w,i)=>{      const c = el("button","chip-w",w);
+    const chipEls = shuffle(q.w).map((w,i)=>{
+      const c = el("button","chip-w",w);
       c.onclick=()=>{chosen.push({w,i}); c.classList.add("used"); paint();};
       chips.appendChild(c); return c;
     });
@@ -3023,14 +3204,14 @@ function practiceQ(q, num, key, uid, onDone){
   let hinted=false;
   const row = el("div","row mt");
   const btn = el("button","btn","تحقق من الإجابة");
-  const hb = el("button","btn ghost sm","💡 تلميح");
+  const hb = el("button","btn ghost sm","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.7.8 1 1.6 1 2.5h6c0-.9.3-1.7 1-2.5A6 6 0 0 0 12 2z'/></svg> تلميح");
   hb.onclick=()=>{ const msg = item.hint(); hinted=true; hb.disabled=true;
     const d = el("div","fb","<b>تلميح</b>"+msg); item.node.insertBefore(d, row); };
   row.appendChild(btn); row.appendChild(hb);
   item.node.appendChild(row);
   btn.onclick=()=>{
     const res = item.check(true);
-    if(res===null){ btn.textContent="جاوب أولاً"; setTimeout(()=>btn.textContent="تحقق من الإجابة",1200); return; }
+    if(res===null){ btn.textContent="جاوب أولاً"; setTimeout(()=>btn.innerHTML="تحقق من الإجابة",1200); return; }
     btn.disabled=true; hb.disabled=true;
     item.node.classList.add(res?"correct":"wrong", res?"pop":"shake");
     const fb = el("div","fb "+(res?"ok":"no"));
@@ -3089,64 +3270,148 @@ function go(v){
   if(state.minute){ clearInterval(state.minute.timer); state.minute=null; }
   window.scrollTo(0,0);
   if(state.stepTimer){clearInterval(state.stepTimer); state.stepTimer=null;}
-  ttsKill(); if(SPK_ON){SPK_ON.classList.remove("playing"); SPK_ON.textContent="🔊"; SPK_ON=null;}
+  ttsKill(); if(SPK_ON){SPK_ON.classList.remove("playing"); SPK_ON.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"; SPK_ON=null;}
   ({home:renderHome,lessons:renderLessons,vocab:renderVocab,read:renderReading,shadow:renderShadow,step:renderStep,drill:renderDrill,test:renderTest,prog:renderProgress})[v]();
 }
 document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>go(b.dataset.v));
 $("#thmBtn").onclick=()=>{
   const d=document.documentElement, dark=d.dataset.theme==="dark";
   d.dataset.theme = dark?"light":"dark";
-  $("#thmBtn").textContent = dark?"🌙":"☀️";
+  $("#thmBtn").innerHTML=dark?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z'/></svg>":"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/></svg>";
 };
-$("#sndBtn").onclick=()=>{ sndOn=!sndOn; $("#sndBtn").setAttribute("aria-pressed",String(sndOn)); $("#sndBtn").textContent=sndOn?"🔊":"🔇"; if(sndOn)beep("ok"); };
+$("#sndBtn").onclick=()=>{ sndOn=!sndOn; $("#sndBtn").setAttribute("aria-pressed",String(sndOn)); $("#sndBtn").innerHTML=sndOn?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>":"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM17 9l5 6M22 9l-5 6'/></svg>"; if(sndOn)beep("ok"); };
 
 /* ================= البداية ================= */
 function renderHome(){
   const v=$("#v-home"); v.innerHTML="";
-  const pct = Math.min(100, Math.round(state.answered/state.goal*100));
-  const hero = el("div","hero");
-  const g = el("div","hero-grid");
-  const txt = el("div"); txt.style.flex="1"; txt.style.minWidth="240px";
-  txt.innerHTML = "<h1>مرحبًا 👋 مستواك الآن: <span class='lvl-name'>"+levelName()+"</span></h1>"+
-    "<p>"+LESSONS.length+" درسًا من A1 حتى مقدمة C1، "+VOCAB.reduce((s,U)=>s+U.w.length,0)+" كلمة، تدريب نطق Shadowing، وبنك من <b style='color:#FFD54A'>"+drillTotal()+"</b> تدريبًا. تجاوزي مستواك خطوة خطوة.</p>";
-  g.appendChild(txt);
-  g.appendChild(ring(pct,118,"#FFD54A", state.answered+"/"+state.goal, "هدف اليوم"));
-  hero.appendChild(g);
+  const pct=Math.min(100,Math.round(state.answered/state.goal*100));
+  const next=LESSONS.find(L=>lessonDone(L)<L.q.length)||LESSONS[0];
 
-  const acts = el("div","hero-actions");
-  const next = LESSONS.find(L=>lessonDone(L)<L.q.length) || LESSONS[0];
-  const cont = el("button","btn mark","▶ واصل: "+next.ta);
-  cont.onclick=()=>{ go("lessons"); openLesson(next.id); };
-  acts.appendChild(cont);
-  const ch = el("button","btn ghost","⏱️ تحدي الدقيقة");
-  ch.style.color="#fff"; ch.style.borderColor="rgba(255,255,255,.3)";
-  ch.onclick=()=>{ go("drill"); setTimeout(startMinute,60); };
-  acts.appendChild(ch);
-  hero.appendChild(acts);
-  v.appendChild(hero);
+  /* ===== 1) البانر ===== */
+  const ban=el("div","banner");
+  const circ=el("div","bcircle");
+  circ.appendChild(ring(pct,120,"var(--mark-deep)",state.answered+"/"+state.goal,"today"));
+  ban.appendChild(circ);
+  const bm=el("div","bmain");
+  bm.innerHTML="<h1>MASTER ENGLISH<em>step by step</em></h1><p>"+LESSONS.length+" دروس قواعد، "+
+    VOCAB.reduce((s,U)=>s+U.w.length,0)+" كلمة، "+READING.length+" نص قراءة، ومحاكي ستيب — كله بشرح عربي وتصحيح فوري.</p>";
+  const of=el("div","offer","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M13 2 4 14h7l-1 8 9-12h-7z'/></svg> "+state.xp+" XP · "+levelName()+" · <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9-2 1.5-2.5 4-2.5 4S11 8 9 6c-1 3-4 5-4 9.5C5 19.3 8 22 12 22z'/></svg> "+state.streak);
+  bm.appendChild(of);
+  const acts=el("div","row"); acts.style.marginTop="14px";
+  const go1=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M8 5v14l11-7z'/></svg> Continue: "+next.t);
+  go1.onclick=()=>{ go("lessons"); openLesson(next.id); };
+  const go2=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2'/></svg> One-Minute Challenge");
+  go2.style.color="#fff"; go2.style.borderColor="rgba(255,255,255,.35)";
+  go2.onclick=startMinute;
+  acts.appendChild(go1); acts.appendChild(go2); bm.appendChild(acts);
+  ban.appendChild(bm);
+  const mini=el("div","bmini");
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg>","step"],["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>","shadow"]].forEach(([ic,tab])=>{ const d=el("div","",ic); d.onclick=()=>go(tab); d.style.cursor="pointer"; mini.appendChild(d); });
+  ban.appendChild(mini);
+  v.appendChild(ban);
 
-  v.appendChild(el("h2","title","خريطة رحلتك"));
-  v.appendChild(el("p","sub","21 محطة من مستوى المبتدئ إلى B1. المحطة تتلوّن بالأصفر عندما تبدأ فيها، وبالأخضر عندما تكمل تدريباتها."));
+  /* ===== 2) الأقسام (Menu) ===== */
+  const sh1=el("div","sechead");
+  sh1.innerHTML="<h2>Menu</h2><span class='ar'>وش تحبين تتعلمين اليوم؟</span>";
+  v.appendChild(sh1);
+  const cats=el("div","cats");
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 4H8a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h13zM5 20a2 2 0 0 0 2 2h13'/></svg>","Grammar",LESSONS.length+" دروس","lessons"],["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2 2 7l10 5 10-5zM2 12l10 5 10-5M2 17l10 5 10-5'/></svg>","Vocabulary",VOCAB.length+" وحدات","vocab"],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 6s-2-2-6-2H3v14h3c4 0 6 2 6 2s2-2 6-2h3V4h-3c-4 0-6 2-6 2zM12 6v14'/></svg>","Reading",READING.length+" نصًا","read"],["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg>","Listening",LISTEN.length+" مقاطع","step"],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>","Speaking","Shadowing","shadow"],["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M2 8l10-5 10 5-10 5zM6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5'/></svg>","STEP","محاكي كامل","step"]].forEach(([ic,nm,sb,tab])=>{
+    const b=el("button","cat");
+    b.appendChild(el("div","ic",ic)); b.appendChild(el("div","nm",nm)); b.appendChild(el("div","sub",sb));
+    b.onclick=()=>go(tab); cats.appendChild(b);
+  });
+  v.appendChild(cats);
+
+  /* ===== 3) الدروس المقترحة ===== */
+  const sh2=el("div","sechead");
+  sh2.innerHTML="<h2>Pick up where you left off</h2><span class='ar'>أقرب أربعة دروس في مسارك</span>";
+  const all=el("button","more","VIEW ALL"); all.onclick=()=>go("lessons"); sh2.appendChild(all);
+  v.appendChild(sh2);
+  const g=el("div","grid");
+  const start=LESSONS.indexOf(next);
+  LESSONS.slice(start,start+4).forEach(L=>{
+    const d=lessonDone(L);
+    const b=el("button","card");
+    b.appendChild(el("span","badge "+L.lvl,L.lvl));
+    b.appendChild(el("div","t en-t",L.t));
+    b.appendChild(el("div","t-ar",L.ta));
+    b.appendChild(el("div","m",d?("أنجزت "+d+" من "+L.q.length+" · دقة "+acc(L.id)+"%"):(L.q.length+" تدريبًا")));
+    const mb=el("div","mini"); const fi=el("i"); fi.style.width=(d/L.q.length*100)+"%"; mb.appendChild(fi); b.appendChild(mb);
+    b.onclick=()=>{ go("lessons"); openLesson(L.id); };
+    g.appendChild(b);
+  });
+  v.appendChild(g);
+
+  /* ===== 4) وعدنا + التذكرة + المربعات ===== */
+  const sh3=el("div","sechead");
+  sh3.innerHTML="<h2>Our Promise</h2><span class='ar'>ما فيه حشو — محتوى وتدريب وتصحيح فقط</span>";
+  v.appendChild(sh3);
+  const two=el("div","two");
+  const left=el("div");
+  const feats=el("div","feats");
+  [[drillTotal(),"تدريبًا بتصحيح فوري"],[LESSONS.length,"درس قواعد A1–C1"],
+   [VOCAB.reduce((s,U)=>s+U.w.length,0),"كلمة بالنطق"],["STEP","محاكي بدرجة من 100"]].forEach(([n,l])=>{
+    const f=el("div","feat");
+    f.appendChild(el("div","circ",String(n)));
+    f.appendChild(el("div","lb",l)); feats.appendChild(f);
+  });
+  left.appendChild(feats);
+  const tk=el("div","ticket");
+  tk.appendChild(el("div","tic","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M3 9a2 2 0 0 0 0 6v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3a2 2 0 0 1 0-6V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1zM13 5v14'/></svg>"));
+  const tx=el("div","tx");
+  tx.innerHTML="<b>THE DAILY TICKET</b><span>حلّي "+state.goal+" سؤالًا اليوم واكسبي الشارة — أنجزتِ "+state.answered+" حتى الآن.</span>";
+  tk.appendChild(tx);
+  const unlock=el("button","btn mark","UNLOCK NOW");
+  unlock.onclick=()=>{ go("drill"); };
+  tk.appendChild(unlock);
+  left.appendChild(tk);
+  two.appendChild(left);
+  const tiles=el("div","tiles");
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM15 9l-2 6-4 2 2-6z'/></svg>","Placement Test","اعرفي مستواك الحقيقي","light",()=>{go("test"); startPlacement();}],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/></svg>","Graded Tests","نتيجة ومراجعة أخطاء","",()=>go("test")],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 12h-6l-2 3h-4l-2-3H2M5 5h14l3 7v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z'/></svg>","My Mistakes Box",(state.review.length||0)+" سؤالًا للمراجعة","light",openReview],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v7H6z'/></svg>","Worksheet","20 سؤالًا للطباعة","",worksheet],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 20v-6M12 20V6M19 20v-10M3 20h18'/></svg>","My Progress","شارات وإحصائيات","light",()=>go("prog")],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM22 21v-2a4 4 0 0 0-3-3.8'/></svg>","Teacher Dashboard","متابعة الطالبات","",openTeacher]].forEach(([ic,nm,sb,cls,fn])=>{
+    const t=el("button","tile "+cls);
+    t.appendChild(el("div","ic",ic));
+    const w=el("div"); w.appendChild(el("div","nm",nm)); w.appendChild(el("div","sb",sb)); t.appendChild(w);
+    t.onclick=fn; tiles.appendChild(t);
+  });
+  two.appendChild(tiles);
+  v.appendChild(two);
+
+  /* ===== 5) شريط دعائي ===== */
+  const cta=el("div","ctabar");
+  cta.innerHTML="Teacher Huda — Your Complete English Companion for Middle School &amp; STEP<span>من الصفر إلى مقدمة C1 · "+drillTotal()+" تدريبًا · يعمل بدون إنترنت</span>";
+  v.appendChild(cta);
+
+  /* ===== 6) خريطة الرحلة ===== */
+  const sh4=el("div","sechead");
+  sh4.innerHTML="<h2>Your Learning Path</h2><span class='ar'>"+LESSONS.length+" محطة — تتلوّن كلما تقدمتِ</span>";
+  v.appendChild(sh4);
   ["A1","A2","B1","B2","C1"].forEach(lv=>{
-    const ls = LESSONS.filter(L=>L.lvl===lv);
-    const doneN = ls.filter(L=>lessonDone(L)===L.q.length).length;
-    const bar = el("div","levelbar");
-    bar.appendChild(el("span","tag "+lv, lv));
+    const ls=LESSONS.filter(L=>L.lvl===lv);
+    const doneN=ls.filter(L=>lessonDone(L)===L.q.length).length;
+    const bar=el("div","levelbar");
+    bar.appendChild(el("span","tag "+lv,lv));
     bar.appendChild(el("span","ln"));
-    bar.appendChild(el("span","pc", doneN+" من "+ls.length+" مكتملة"));
+    bar.appendChild(el("span","pc",doneN+" / "+ls.length+" completed"));
     v.appendChild(bar);
-    const ol = el("ol","journey");
+    const ol=el("ol","journey");
     ls.forEach(L=>{
-      const d = lessonDone(L), full = d===L.q.length;
-      const li = el("li","station"+(full?" full":d?" on":""));
-      li.appendChild(el("div","node", full?"✓":String(LESSONS.indexOf(L)+1)));
-      const b = el("button");
-      const body = el("div");
-      body.appendChild(el("div","st-t",L.ta));
-      body.appendChild(el("div","st-e",L.t));
+      const d=lessonDone(L), full=d===L.q.length;
+      const li=el("li","station"+(full?" full":d?" on":""));
+      li.appendChild(el("div","node",full?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg>":String(LESSONS.indexOf(L)+1)));
+      const b=el("button");
+      const body=el("div");
+      body.appendChild(el("div","st-t en-t",L.t));
+      body.appendChild(el("div","st-e ar-sub",L.ta));
       b.appendChild(body);
-      const m = el("div","st-m");
-      const mb = el("div","mini"); const fill=el("i"); fill.style.width=(d/L.q.length*100)+"%"; mb.appendChild(fill);
+      const m=el("div","st-m");
+      const mb=el("div","mini"); const fill=el("i"); fill.style.width=(d/L.q.length*100)+"%"; mb.appendChild(fill);
       m.appendChild(mb); m.appendChild(el("div","",d+"/"+L.q.length));
       b.appendChild(m);
       b.onclick=()=>{ go("lessons"); openLesson(L.id); };
@@ -3160,7 +3425,7 @@ function renderHome(){
 let lvFilter="الكل", lsQuery="";
 function renderLessons(){
   const v=$("#v-lessons"); v.innerHTML="";
-  v.appendChild(el("h2","title","دروس القواعد"));
+  v.appendChild(el("h2","title","Grammar Lessons"));
   v.appendChild(el("p","sub","اقرأ الشرح بالعربي، استمع للأمثلة بالإنجليزي، ثم حل التدريبات مباشرة."));
   const s = el("input","search"); s.type="search"; s.placeholder="ابحث عن قاعدة… (مثال: الماضي، passive)"; s.value=lsQuery;
   s.oninput=()=>{ lsQuery=s.value; drawList(); };
@@ -3184,8 +3449,8 @@ function renderLessons(){
       const d=lessonDone(L);
       const b=el("button","card");
       b.appendChild(el("span","badge "+L.lvl,L.lvl));
-      b.appendChild(el("div","t",L.ta));
-      b.appendChild(el("div","t-en",L.t));
+      b.appendChild(el("div","t en-t",L.t));
+      b.appendChild(el("div","t-ar",L.ta));
       b.appendChild(el("div","m", d? ("أنجزت "+d+" من "+L.q.length+" · دقة "+acc(L.id)+"%") : (L.q.length+" تدريب")));
       const mb=el("div","mini"); const fi=el("i"); fi.style.width=(d/L.q.length*100)+"%"; mb.appendChild(fi); b.appendChild(mb);
       b.onclick=()=>openLesson(L.id);
@@ -3200,22 +3465,22 @@ function openLesson(id){
   const back=el("button","back","→ كل الدروس"); back.onclick=renderLessons; v.appendChild(back);
   const head=el("div","lesson-head");
   head.appendChild(el("span","badge "+L.lvl,L.lvl));
-  head.appendChild(el("h2","",L.ta));
-  head.appendChild(el("p","sub-en",L.t));
+  head.appendChild(el("h2","en-h",L.t));
+  head.appendChild(el("p","sub-ar",L.ta));
   v.appendChild(head);
 
   const p=el("div","panel");
-  p.appendChild(el("h3","","الفكرة باختصار"));
+  p.appendChild(el("h3","","The Idea in Brief"));
   p.appendChild(el("p","",L.intro));
-  p.appendChild(el("h3","","النقاط الأساسية"));
+  p.appendChild(el("h3","","Key Points"));
   const ul=el("ul","pts"); L.pts.forEach(x=>ul.appendChild(el("li","",x))); p.appendChild(ul);
-  p.appendChild(el("h3","","جدول الصيغ"));
+  p.appendChild(el("h3","","Forms Table"));
   const tb=el("table","form"), tr=el("tr");
   L.form.head.forEach(h=>tr.appendChild(el("th","",h))); tb.appendChild(tr);
   L.form.rows.forEach(r=>{const row=el("tr"); r.forEach((c,i)=>row.appendChild(el("td", i===r.length-1?"e":"", c))); tb.appendChild(row);});
   p.appendChild(tb);
 
-  p.appendChild(el("h3","","أمثلة مترجمة — اضغط 🔊 لسماع النطق"));
+  p.appendChild(el("h3","","Examples with Audio <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg>"));
   L.ex.forEach(([e,a])=>{
     const d=el("div","ex-line");
     d.appendChild(spkBtn(e));
@@ -3225,17 +3490,17 @@ function openLesson(id){
   });
   p.appendChild(makePlayer(L.ex.map(x=>x[0]).join(" ")));
 
-  p.appendChild(el("h3","","أخطاء شائعة"));
+  p.appendChild(el("h3","","Common Mistakes"));
   L.mis.forEach(([bad,good,note])=>{
     const d=el("div","mis");
-    d.appendChild(el("div","bad","✗ "+bad));
-    d.appendChild(el("div","good","✓ "+good));
+    d.appendChild(el("div","bad","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M18 6 6 18M6 6l12 12'/></svg> "+bad));
+    d.appendChild(el("div","good","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg> "+good));
     d.appendChild(el("div","note",note));
     p.appendChild(d);
   });
   v.appendChild(p);
 
-  v.appendChild(el("h2","title","تدريبات الدرس"));
+  v.appendChild(el("h2","title","Lesson Exercises"));
   v.appendChild(el("p","sub",L.q.length+" تدريبًا في هذا الدرس — تظهر على دفعات. لكل سؤال تلميح، وشرح بعد التحقق."));
   const holder=el("div"); v.appendChild(holder);
   let shown=0;
@@ -3246,7 +3511,7 @@ function openLesson(id){
     for(let i=shown;i<end;i++) holder.appendChild(practiceQ(L.q[i],i+1,L.id,L.id+"-"+i));
     shown=end;
     const left=L.q.length-shown;
-    if(left>0){ moreBtn.textContent="⬇ اعرض "+Math.min(10,left)+" تدريبات أخرى (متبقٍ "+left+")"; }
+    if(left>0){ moreBtn.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3v12M7 11l5 5 5-5M5 21h14'/></svg> اعرض "+Math.min(10,left)+" تدريبات أخرى (متبقٍ "+left+")"; }
     else moreWrap.remove();
   }
   moreBtn.onclick=batch; moreWrap.appendChild(moreBtn);
@@ -3264,14 +3529,14 @@ function openLesson(id){
 /* ================= المفردات ================= */
 function renderVocab(){
   const v=$("#v-vocab"); v.innerHTML="";
-  v.appendChild(el("h2","title","بنك المفردات"));
+  v.appendChild(el("h2","title","Vocabulary Bank"));
   v.appendChild(el("p","sub","12 وحدة × 10 كلمات. البطاقة تنقلب بالضغط، والسماعة تنطق الكلمة والمثال."));
   const g=el("div","grid");
   VOCAB.forEach(U=>{
     const b=el("button","card");
     b.appendChild(el("span","badge V","10 كلمات"));
-    b.appendChild(el("div","t",U.ta));
-    b.appendChild(el("div","t-en",U.t));
+    b.appendChild(el("div","t en-t",U.t));
+    b.appendChild(el("div","t-ar",U.ta));
     if(state.stats[U.id]) b.appendChild(el("div","m","دقتك: "+acc(U.id)+"%"));
     b.onclick=()=>openVocab(U.id);
     g.appendChild(b);
@@ -3299,14 +3564,14 @@ function openVocab(id){
   });
   v.appendChild(g);
   const row=el("div","row mt");
-  const qz=el("button","btn mark","🎧 اختبر هذه الوحدة (10 أسئلة)");
-  const listen=el("button","btn ghost","🔊 استمع لكل الكلمات");
+  const qz=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg> اختبر هذه الوحدة (10 أسئلة)");
+  const listen=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 5 6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12'/></svg> استمع لكل الكلمات");
   listen.onclick=()=>speak(U.w.map(w=>w[0]).join(", "), listen);
   row.appendChild(qz); row.appendChild(listen); v.appendChild(row);
   const holder=el("div"); v.appendChild(holder);
   qz.onclick=()=>{
     holder.innerHTML="";
-    holder.appendChild(el("h2","title","تدريب المفردات"));
+    holder.appendChild(el("h2","title","Vocabulary Practice"));
     vocabQuestions(U,10).forEach((q,i)=>holder.appendChild(practiceQ(q,i+1,U.id)));
     qz.textContent="أسئلة جديدة"; scrollTo2(holder);
   };
@@ -3326,13 +3591,13 @@ function drillPool(){
 }
 function renderDrill(){
   const v=$("#v-drill"); v.innerHTML="";
-  v.appendChild(el("h2","title","تدريب مكثف"));
+  v.appendChild(el("h2","title","Intensive Practice"));
   v.appendChild(el("p","sub","بنك من "+drillTotal()+" تدريبًا — أسئلة عشوائية متجددة. اختاري المستوى أو نوع السؤال، أو ادخلي تحدي الدقيقة."));
 
   const modes=el("div","grid"); modes.style.marginBottom="18px";
-  [["⏱️","تحدي الدقيقة","كم إجابة صحيحة تجمع في 60 ثانية؟",startMinute],
-   ["🖨️","ورقة عمل للطباعة","20 سؤالًا + مفتاح الإجابات",worksheet],
-   ["🧺","صندوق أخطائي","راجع الأسئلة التي أخطأت فيها",openReview]].forEach(([ic,t,m,fn])=>{
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2'/></svg>","One-Minute Challenge","كم إجابة صحيحة تجمع في 60 ثانية؟",startMinute],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v7H6z'/></svg>","Printable Worksheet","20 سؤالًا + مفتاح الإجابات",worksheet],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 12h-6l-2 3h-4l-2-3H2M5 5h14l3 7v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z'/></svg>","My Mistakes Box","راجع الأسئلة التي أخطأت فيها",openReview]].forEach(([ic,t,m,fn])=>{
     const b=el("button","card");
     b.appendChild(el("div","big-ic",ic));
     b.appendChild(el("div","t",t)); b.appendChild(el("div","m",m));
@@ -3353,7 +3618,7 @@ function renderDrill(){
   });
   v.appendChild(f2);
 
-  const row=el("div","row"); const gen=el("button","btn mark","🎲 عشر أسئلة جديدة");
+  const row=el("div","row"); const gen=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.5 8.5h.01M15.5 15.5h.01M12 12h.01'/></svg> عشر أسئلة جديدة");
   row.appendChild(gen); v.appendChild(row);
   const holder=el("div"); holder.style.marginTop="16px"; v.appendChild(holder);
   gen.onclick=()=>{
@@ -3369,7 +3634,7 @@ function startMinute(){
   go("drill");
   const v=$("#v-drill"); v.innerHTML="";
   const back=el("button","back","→ رجوع للتدريب"); back.onclick=renderDrill; v.appendChild(back);
-  v.appendChild(el("h2","title","تحدي الدقيقة"));
+  v.appendChild(el("h2","title","One-Minute Challenge"));
   v.appendChild(el("p","sub","سؤال يتبعه سؤال. كل إجابة صحيحة نقطة. أفضل نتيجة لك: "+state.bestMinute));
   const tm=el("div","timer");
   const t=el("div","t num","60"); const bar=el("div","bar"); const fill=el("i"); fill.style.width="100%"; bar.appendChild(fill);
@@ -3399,7 +3664,7 @@ function startMinute(){
       holder.innerHTML="";
       const r=el("div","result");
       r.appendChild(ring(Math.min(100,pts*6),140,"#FFD54A",String(pts),"نقطة"));
-      r.appendChild(el("div","msg", pts>=12?"سرعة ممتازة! 🔥":pts>=7?"جيد — حاول تتجاوز 12":"خذ وقتك في الدروس ثم أعد المحاولة"));
+      r.appendChild(el("div","msg", pts>=12?"سرعة ممتازة! <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 22c4 0 7-2.7 7-6.5 0-4-3-6-4-9-2 1.5-2.5 4-2.5 4S11 8 9 6c-1 3-4 5-4 9.5C5 19.3 8 22 12 22z'/></svg>":pts>=7?"جيد — حاول تتجاوز 12":"خذ وقتك في الدروس ثم أعد المحاولة"));
       const rw=el("div","row"); rw.style.justifyContent="center";
       const again=el("button","btn mark","إعادة التحدي"); again.onclick=startMinute;
       const ex=el("button","btn ghost","رجوع"); ex.onclick=renderDrill;
@@ -3414,8 +3679,8 @@ function worksheet(){
   const qs=shuffle(drillPool()).slice(0,20);
   const s=$("#sheetIn"); s.innerHTML="";
   const head=el("div","sheet-head");
-  head.appendChild(el("h2","title","ورقة عمل — Teacher Huda · "+(drill.lvl==="الكل"?"مستويات متنوعة":drill.lvl)));
-  const pr=el("button","btn mark","🖨️ اطبع"); pr.onclick=()=>window.print();
+  head.appendChild(el("h2","title","Worksheet — Teacher Huda · "+(drill.lvl==="الكل"?"مستويات متنوعة":drill.lvl)));
+  const pr=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 14h12v7H6z'/></svg> اطبع"); pr.onclick=()=>window.print();
   const cl=el("button","btn ghost","إغلاق"); cl.onclick=closeSheet;
   head.appendChild(pr); head.appendChild(cl); s.appendChild(head);
   s.appendChild(el("p","sub no-print","20 سؤالًا بدون إجابات، ومفتاح الإجابات في آخر الورقة."));
@@ -3428,7 +3693,7 @@ function worksheet(){
     else d.appendChild(el("div","qt","Order: "+shuffle(q.w).join(" / ")+"  →  ______________________"));
     s.appendChild(d);
   });
-  s.appendChild(el("h3","","مفتاح الإجابات"));
+  s.appendChild(el("h3","","Answer Key"));
   s.appendChild(el("div","ws-key", qs.map((q,i)=>(i+1)+") "+(q.t==="mcq"?KEYS[q.a]+" — "+q.o[q.a]:q.t==="gap"?q.a[0]:q.a)).join(" &nbsp;·&nbsp; ")));
   $("#sheet").classList.add("open");
 }
@@ -3439,10 +3704,10 @@ $("#sheet").onclick=(e)=>{ if(e.target.id==="sheet") closeSheet(); };
 function openReview(){
   const s=$("#sheetIn"); s.innerHTML="";
   const head=el("div","sheet-head");
-  head.appendChild(el("h2","title","صندوق أخطائي ("+state.review.length+")"));
+  head.appendChild(el("h2","title","My Mistakes Box ("+state.review.length+")"));
   const cl=el("button","btn ghost","إغلاق"); cl.onclick=closeSheet; head.appendChild(cl);
   s.appendChild(head);
-  if(!state.review.length){ s.appendChild(el("div","note","الصندوق فارغ 👏 كل أسئلتك السابقة صحيحة.")); }
+  if(!state.review.length){ s.appendChild(el("div","note","الصندوق فارغ <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg> كل أسئلتك السابقة صحيحة.")); }
   else{
     s.appendChild(el("p","sub","كل سؤال تجيب عنه صحيحًا يخرج من الصندوق."));
     state.review.slice().forEach((q,i)=>s.appendChild(practiceQ(q,i+1,q.key,q.uid,(ok)=>{ if(ok) setTimeout(()=>{ if($("#sheet").classList.contains("open")) openReview(); },900); })));
@@ -3454,20 +3719,20 @@ $("#fab").onclick=openReview;
 /* ================= الاختبارات ================= */
 function renderTest(){
   const v=$("#v-test"); v.innerHTML=""; state.test=null;
-  v.appendChild(el("h2","title","اختبارات مصححة"));
+  v.appendChild(el("h2","title","Graded Tests"));
   v.appendChild(el("p","sub","بدون تصحيح فوري: جاوب على كل الأسئلة، ثم احصل على نتيجتك ومراجعة أخطائك."));
   const g=el("div","grid");
   const ph=el("button","card"); ph.style.borderColor="var(--mark)";
-  ph.appendChild(el("div","big-ic","🧭"));
-  ph.appendChild(el("div","t","اختبار تحديد المستوى"));
+  ph.appendChild(el("div","big-ic","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM15 9l-2 6-4 2 2-6z'/></svg>"));
+  ph.appendChild(el("div","t","Placement Test"));
   ph.appendChild(el("div","m","20 سؤالًا متدرجة من A1 إلى C1 — يخبرك أين تبدأ بالضبط"));
   ph.onclick=startPlacement; g.appendChild(ph);
-  [["🔵","اختبار A1","أساسيات المبتدئ","A1",15],
-   ["🟢","اختبار A2","المستوى المتوسط","A2",15],
-   ["🟣","اختبار B1","ما فوق المتوسط","B1",15],
-   ["🌹","اختبار B2","المستوى المتقدم","B2",15],
-   ["🟡","اختبار المفردات","من كل الوحدات","V",15],
-   ["🏁","الاختبار الشامل","من كل المستويات","الكل",20]].forEach(([ic,t,m,lvl,n])=>{
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>","A1 Test","أساسيات المبتدئ","A1",15],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>","A2 Test","المستوى المتوسط","A2",15],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>","B1 Test","ما فوق المتوسط","B1",15],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>","B2 Test","المستوى المتقدم","B2",15],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>","Vocabulary Test","من كل الوحدات","V",15],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 22V4M4 4h13l-2 4 2 4H4'/></svg>","Comprehensive Test","من كل المستويات","الكل",20]].forEach(([ic,t,m,lvl,n])=>{
     const b=el("button","card");
     b.appendChild(el("div","big-ic",ic));
     b.appendChild(el("div","t",t)); b.appendChild(el("div","m",m+" · "+n+" سؤال"));
@@ -3507,7 +3772,7 @@ function drawTest(){
   const next=el("button","btn", last?"إنهاء وعرض النتيجة":"السؤال التالي ←");
   next.onclick=()=>{
     const res=item.check(false);
-    if(res===null){ next.textContent="جاوب أولاً"; setTimeout(()=>next.textContent=last?"إنهاء وعرض النتيجة":"السؤال التالي ←",1200); return; }
+    if(res===null){ next.textContent="جاوب أولاً"; setTimeout(()=>next.innerHTML=last?"إنهاء وعرض النتيجة":"السؤال التالي ←",1200); return; }
     record(q.key||"اختبار",res,q.uid);
     if(res){T.right++; dropReview(q);} else {T.wrong.push(q); addReview(q);}
     beep(res?"ok":"no");
@@ -3527,7 +3792,7 @@ function testResult(){
   r.appendChild(el("div","msg","إجاباتك الصحيحة: "+T.right+" من "+T.qs.length+" — "+msg));
   const rw=el("div","row"); rw.style.justifyContent="center";
   const again=el("button","btn mark","اختبار آخر"); again.onclick=renderTest;
-  const rev=el("button","btn ghost","🧺 صندوق أخطائي"); rev.onclick=openReview;
+  const rev=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 12h-6l-2 3h-4l-2-3H2M5 5h14l3 7v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z'/></svg> صندوق أخطائي"); rev.onclick=openReview;
   rw.appendChild(again); rw.appendChild(rev); r.appendChild(rw);
   v.appendChild(r);
   /* حركة عدّ النتيجة */
@@ -3546,7 +3811,7 @@ function testResult(){
     let start=null;
     order.forEach(lv=>{ if(start===null && res[lv]!==undefined && res[lv]<70) start=lv; });
     const box=el("div","card"); box.style.marginTop="18px";
-    box.appendChild(el("div","t","نتيجتك في كل مستوى"));
+    box.appendChild(el("div","t","Score by Level"));
     order.forEach(lv=>{
       if(res[lv]===undefined) return;
       const r=el("div","lvlbar");
@@ -3568,16 +3833,16 @@ function testResult(){
     v.appendChild(box);
   }
   if(T.wrong.length){
-    v.appendChild(el("h2","title","راجع أخطاءك"));
+    v.appendChild(el("h2","title","Review Your Mistakes"));
     v.appendChild(el("p","sub","نفس الأسئلة مع الشرح — حلها الآن لتخرج من صندوق الأخطاء."));
     T.wrong.forEach((q,i)=>v.appendChild(practiceQ(q,i+1,q.key,q.uid)));
-  } else v.appendChild(el("div","note","علامة كاملة بدون أخطاء 💎 جرّب مستوى أعلى."));
+  } else v.appendChild(el("div","note","علامة كاملة بدون أخطاء <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M6 3h12l4 6-10 12L2 9zM2 9h20M12 3 8 9l4 12 4-12z'/></svg> جرّب مستوى أعلى."));
 }
 
 /* ================= تقدمي ================= */
 function renderProgress(){
   const v=$("#v-prog"); v.innerHTML="";
-  v.appendChild(el("h2","title","تقدمي"));
+  v.appendChild(el("h2","title","My Progress"));
   v.appendChild(el("p","sub", persist?"تقدمك محفوظ على هذا الجهاز باسمك ويستمر بعد إغلاق الصفحة.":"تنبيه: المتصفح لا يسمح بالحفظ، فالإحصائيات لهذه الجلسة فقط."));
   const a=state.answered?Math.round(state.right/state.answered*100):0;
   const st=el("div","stats");
@@ -3586,18 +3851,18 @@ function renderProgress(){
   v.appendChild(st);
 
   const prow=el("div","row"); prow.style.marginBottom="22px";
-  const rp=el("button","btn mark","📤 أرسل تقريري للمعلمة"); rp.onclick=openReport;
-  const th=el("button","btn ghost","👩‍🏫 لوحة المعلمة"); th.onclick=openTeacher;
-  const sw=el("button","btn ghost","🔄 تبديل الطالبة"); sw.onclick=drawGate;
+  const rp=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 2 11 13M22 2l-7 20-4-9-9-4z'/></svg> أرسل تقريري للمعلمة"); rp.onclick=openReport;
+  const th=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM22 21v-2a4 4 0 0 0-3-3.8'/></svg> لوحة المعلمة"); th.onclick=openTeacher;
+  const sw=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20.5 12a8.5 8.5 0 1 1-2.8-6.3M21 3v6h-6'/></svg> تبديل الطالبة"); sw.onclick=drawGate;
   prow.appendChild(rp); prow.appendChild(th); prow.appendChild(sw);
   v.appendChild(prow);
-  v.appendChild(el("h2","title","الشارات"));
+  v.appendChild(el("h2","title","Badges"));
   v.appendChild(el("p","sub","افتح "+BADGES.filter(b=>state.badges[b.id]).length+" من "+BADGES.length+" شارة."));
   const bg=el("div","grid");
   BADGES.forEach(b=>{
     const got=!!state.badges[b.id];
     const c=el("div","bdg "+(got?"got":"locked"));
-    c.appendChild(el("div","ic",got?b.ic:"🔒"));
+    c.appendChild(el("div","ic",got?b.ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 11h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V7a4 4 0 0 1 8 0v4'/></svg>"));
     const t=el("div"); t.appendChild(el("div","n",b.n)); t.appendChild(el("div","d",b.d)); c.appendChild(t);
     bg.appendChild(c);
   });
@@ -3605,7 +3870,7 @@ function renderProgress(){
 
   const keys=Object.keys(state.stats);
   if(!keys.length){ v.appendChild(el("div","note","ابدأ بأي درس وستظهر تفاصيل أدائك هنا.")); return; }
-  v.appendChild(el("h2","title","أداؤك حسب الدرس"));
+  v.appendChild(el("h2","title","Performance by Lesson"));
   v.appendChild(el("p","sub","مرتبة من الأضعف — ابدأ مراجعتك من الأعلى."));
   const g=el("div","grid");
   keys.map(k=>{
@@ -3626,7 +3891,7 @@ function renderProgress(){
 /* ================= القراءة والاستيعاب ================= */
 function renderReading(){
   const v=$("#v-read"); v.innerHTML="";
-  v.appendChild(el("h2","title","القراءة والاستيعاب"));
+  v.appendChild(el("h2","title","Reading Comprehension"));
   v.appendChild(el("p","sub",READING.length+" نصًا بمستويات B1 إلى C1 و"+READING.reduce((s,R)=>s+R.q.length,0)+" سؤال فهم واستنتاج، مع قائمة مفردات وإمكانية الاستماع للنص."));
   const f=el("div","pill-row");
   ["الكل","B1","B2","C1"].forEach(x=>{ const b=el("button","fbtn",x==="الكل"?"كل المستويات":x); b.setAttribute("aria-pressed",String((state.readLvl||"الكل")===x));
@@ -3637,8 +3902,8 @@ function renderReading(){
     const done = state.stats[R.id];
     const b=el("button","card");
     b.appendChild(el("span","badge "+R.lvl,R.lvl));
-    b.appendChild(el("div","t",R.ta));
-    b.appendChild(el("div","t-en",R.t));
+    b.appendChild(el("div","t en-t",R.t));
+    b.appendChild(el("div","t-ar",R.ta));
     b.appendChild(el("div","m", R.mins+" دقائق قراءة · "+R.q.length+" أسئلة"+(done?" · دقتك "+acc(R.id)+"%":"")));
     b.onclick=()=>openReading(R.id);
     g.appendChild(b);
@@ -3650,8 +3915,8 @@ function openReading(id){
   const back=el("button","back","→ كل النصوص"); back.onclick=renderReading; v.appendChild(back);
   const head=el("div","lesson-head");
   head.appendChild(el("span","badge "+R.lvl,R.lvl));
-  head.appendChild(el("h2","",R.ta));
-  head.appendChild(el("p","sub-en",R.t));
+  head.appendChild(el("h2","en-h",R.t));
+  head.appendChild(el("p","sub-ar",R.ta));
   v.appendChild(head);
   const p=el("div","panel"); p.style.borderRadius="0 0 var(--r-l) var(--r-l)";
   const meta=el("div","rmeta");
@@ -3664,12 +3929,12 @@ function openReading(id){
     w.appendChild(el("p","",par));
     p.appendChild(w);
   });
-  p.appendChild(el("h3","","مفردات النص"));
+  p.appendChild(el("h3","","Glossary"));
   const gl=el("div","gloss");
   R.gloss.forEach(([w,m])=>gl.appendChild(el("span","","<b>"+w+"</b> "+m)));
   p.appendChild(gl);
   v.appendChild(p);
-  v.appendChild(el("h2","title","أسئلة الفهم"));
+  v.appendChild(el("h2","title","Comprehension Questions"));
   v.appendChild(el("p","sub","بعض الأسئلة تحتاج استنتاجًا لا نسخًا من النص — اقرأ بتمعّن."));
   R.q.forEach((q,i)=>v.appendChild(practiceQ(Object.assign({},q,{src:R.ta}), i+1, R.id, R.id+"-"+i)));
   const row=el("div","row mt");
@@ -3688,9 +3953,9 @@ function audioCard(item, opts){
   c.appendChild(makePlayer(item.script, opts.limit?{limit:opts.limit}:{}));
   c.appendChild(el("div","m", opts.limit? ("مسموح "+(opts.limit===2?"مرتان":opts.limit+" مرات")+" فقط — مثل الاختبار الحقيقي") : "استمع كما تشاء: أوقف، تابع، أو بطّئ السرعة"));
   if(!opts.hideScript){
-    const sh=el("button","btn ghost sm","📄 اعرض النص المكتوب");
+    const sh=el("button","btn ghost sm","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4'/></svg> اعرض النص المكتوب");
     const sc=el("div","script",item.script); sc.hidden=true;
-    sh.onclick=()=>{ sc.hidden=!sc.hidden; sh.textContent = sc.hidden?"📄 اعرض النص المكتوب":"إخفاء النص"; };
+    sh.onclick=()=>{ sc.hidden=!sc.hidden; sh.innerHTML = sc.hidden?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4'/></svg> اعرض النص المكتوب":"إخفاء النص"; };
     c.appendChild(sh); c.appendChild(sc);
   }
   return c;
@@ -3698,11 +3963,11 @@ function audioCard(item, opts){
 
 function renderStep(){
   const v=$("#v-step"); v.innerHTML="";
-  v.appendChild(el("h2","title","اختبار ستيب STEP"));
+  v.appendChild(el("h2","title","STEP Exam Practice"));
   v.appendChild(el("p","sub","تدريب على نمط اختبار كفايات اللغة الإنجليزية: أسئلة اختيار من متعدد فقط، وقسم استماع يُنطق صوتيًا داخل الموقع."));
 
   const info=el("div","card"); info.style.marginBottom="18px";
-  info.appendChild(el("div","t","كيف يتكوّن الاختبار؟"));
+  info.appendChild(el("div","t","Exam Format"));
   const tb=el("table","wtable");
   const tr=el("tr"); ["القسم","English","الوزن التقريبي"].forEach(x=>tr.appendChild(el("th","",x))); tb.appendChild(tr);
   STEPINFO.secs.forEach(r=>{ const row=el("tr"); r.forEach(c=>row.appendChild(el("td","",c))); tb.appendChild(row); });
@@ -3711,17 +3976,17 @@ function renderStep(){
   v.appendChild(info);
 
   const g=el("div","grid");
-  [["📖","الاستيعاب المقروء",READING.length+" نصًا · "+READING.reduce((s,R)=>s+R.q.length,0)+" سؤال فهم واستنتاج",()=>go("read")],
-   ["🔤","التراكيب النحوية","12 سؤال قواعد بنمط ستيب",()=>stepSection("struct")],
-   ["🎧","فهم المسموع",LISTEN.length+" مقطعًا منطوقًا · "+LISTEN.reduce((s,S)=>s+S.q.length,0)+" سؤالًا",()=>stepSection("listen")],
-   ["✍️","التحليل الكتابي",COMP.length+" سؤالًا: أدوات الربط، الأخطاء، ترتيب الأفكار، الأسلوب",()=>stepSection("comp")]].forEach(([ic,t,m,fn])=>{
+  [["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 6s-2-2-6-2H3v14h3c4 0 6 2 6 2s2-2 6-2h3V4h-3c-4 0-6 2-6 2zM12 6v14'/></svg>","Reading Comprehension",READING.length+" نصًا · "+READING.reduce((s,R)=>s+R.q.length,0)+" سؤال فهم واستنتاج",()=>go("read")],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 7V5h16v2M9 19h6M12 5v14'/></svg>","Structure","12 سؤال قواعد بنمط ستيب",()=>stepSection("struct")],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg>","Listening",LISTEN.length+" مقطعًا منطوقًا · "+LISTEN.reduce((s,S)=>s+S.q.length,0)+" سؤالًا",()=>stepSection("listen")],
+   ["<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'/></svg>","Written Text Analysis",COMP.length+" سؤالًا: أدوات الربط، الأخطاء، ترتيب الأفكار، الأسلوب",()=>stepSection("comp")]].forEach(([ic,t,m,fn])=>{
     const b=el("button","card");
     b.appendChild(el("div","big-ic",ic)); b.appendChild(el("div","t",t)); b.appendChild(el("div","m",m));
     b.onclick=fn; g.appendChild(b);
   });
   const mk=el("button","card"); mk.style.borderColor="var(--mark)";
-  mk.appendChild(el("div","big-ic","🎓"));
-  mk.appendChild(el("div","t","محاكي ستيب كامل"));
+  mk.appendChild(el("div","big-ic","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M2 8l10-5 10 5-10 5zM6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5'/></svg>"));
+  mk.appendChild(el("div","t","Full STEP Simulator"));
   mk.appendChild(el("div","m","20 سؤالًا من الأقسام الأربعة · 20 دقيقة · نتيجة من 100"));
   mk.onclick=startStepMock; g.appendChild(mk);
   v.appendChild(g);
@@ -3732,7 +3997,7 @@ function stepSection(kind){
   const v=$("#v-step"); v.innerHTML="";
   const back=el("button","back","→ رجوع لقسم ستيب"); back.onclick=renderStep; v.appendChild(back);
   if(kind==="struct"){
-    v.appendChild(el("h2","title","التراكيب النحوية"));
+    v.appendChild(el("h2","title","Structure"));
     v.appendChild(el("p","sub","أسئلة قواعد بصيغة ستيب: اختر التكملة الصحيحة."));
     const pool=shuffle(POOL.filter(q=>q.t==="mcq" && ["A2","B1","B2","C1"].indexOf(q.lvl)>-1)).slice(0,12);
     pool.forEach((q,i)=>v.appendChild(practiceQ(q,i+1,"STEP-G",q.uid)));
@@ -3740,14 +4005,14 @@ function stepSection(kind){
     const r=el("div","row mt"); r.appendChild(again); v.appendChild(r);
   }
   else if(kind==="comp"){
-    v.appendChild(el("h2","title","التحليل الكتابي"));
+    v.appendChild(el("h2","title","Written Text Analysis"));
     v.appendChild(el("p","sub","أسئلة عن ترتيب الأفكار، الجملة الافتتاحية، الأخطاء التركيبية، والأسلوب الأكاديمي."));
     shuffle(COMP).slice(0,8).forEach((q,i)=>v.appendChild(practiceQ(Object.assign({},q,{src:"التحليل الكتابي"}),i+1,"STEP-C")));
     const again=el("button","btn mark","أسئلة جديدة"); again.onclick=()=>stepSection("comp");
     const r=el("div","row mt"); r.appendChild(again); v.appendChild(r);
   }
   else {
-    v.appendChild(el("h2","title","فهم المسموع"));
+    v.appendChild(el("h2","title","Listening"));
     v.appendChild(el("p","sub",LISTEN.length+" مقطعًا — اضغطي تشغيل، ثم أجيبي دون النظر للنص. تقدرين تكشفين النص بعد الإجابة للمراجعة."));
     const types=["الكل"].concat([...new Set(LISTEN.map(S=>S.type))]);
     const f=el("div","pill-row");
@@ -3757,7 +4022,7 @@ function stepSection(kind){
     const g=el("div","grid");
     LISTEN.filter(S=>!state.lisType||state.lisType==="الكل"||S.type===state.lisType).forEach(S=>{
       const b=el("button","card");
-      b.appendChild(el("div","big-ic","🎧"));
+      b.appendChild(el("div","big-ic","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg>"));
       b.appendChild(el("div","t",S.ta)); b.appendChild(el("div","m",S.type+" · "+S.q.length+" أسئلة"));
       b.onclick=()=>openListen(S.id); g.appendChild(b);
     });
@@ -3824,7 +4089,7 @@ function drawStepMock(){
     it.passage.text.forEach(par=>{ const w=el("div","pw"); w.appendChild(el("p","",par)); p.appendChild(w); });
     v.appendChild(p);
   } else if(it.sec==="reading"){
-    const rr=el("button","btn ghost sm","📄 اعرض النص مرة أخرى");
+    const rr=el("button","btn ghost sm","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4'/></svg> اعرض النص مرة أخرى");
     rr.onclick=()=>{ const p=el("div","passage"); S.passage.text.forEach(par=>{const w=el("div","pw"); w.appendChild(el("p","",par)); p.appendChild(w);}); rr.replaceWith(p); };
     v.appendChild(rr);
   }
@@ -3837,7 +4102,7 @@ function drawStepMock(){
   const nx=el("button","btn", last?"إنهاء وعرض النتيجة":"التالي ←");
   nx.onclick=()=>{
     const res=item.check(false);
-    if(res===null){ nx.textContent="جاوب أولاً"; setTimeout(()=>nx.textContent=last?"إنهاء وعرض النتيجة":"التالي ←",1200); return; }
+    if(res===null){ nx.textContent="جاوب أولاً"; setTimeout(()=>nx.innerHTML=last?"إنهاء وعرض النتيجة":"التالي ←",1200); return; }
     S.res[it.sec][1]++; if(res) S.res[it.sec][0]++; else { S.wrong.push(it.q); addReview(it.q); }
     record("STEP-"+it.sec, res, it.q.uid);
     beep(res?"ok":"no");
@@ -3867,7 +4132,7 @@ function stepResult(timeout){
   v.appendChild(res);
 
   const box=el("div","card"); box.style.marginTop="18px";
-  box.appendChild(el("div","t","أداؤك في كل قسم"));
+  box.appendChild(el("div","t","Score by Section"));
   Object.keys(SECW).forEach(k=>{
     const [r,n]=S.res[k]; if(!n) return;
     const p=Math.round(r/n*100);
@@ -3884,7 +4149,7 @@ function stepResult(timeout){
   v.appendChild(box);
 
   if(S.wrong.length){
-    v.appendChild(el("h2","title","مراجعة الأخطاء"));
+    v.appendChild(el("h2","title","Mistake Review"));
     S.wrong.forEach((q,i)=>v.appendChild(practiceQ(q,i+1,"STEP-R",q.uid)));
   }
 }
@@ -3900,12 +4165,12 @@ function shadowTracks(){
   const ex = lv => LESSONS.filter(L=>lv.indexOf(L.lvl)>-1).flatMap(L=>L.ex.map(e=>({en:e[0],ar:e[1]})));
   const rd = lv => READING.filter(R=>lv.indexOf(R.lvl)>-1).flatMap(R=>R.text.flatMap(p=>sentSplit(p)).map(s=>({en:s,ar:""})));
   return [
-   {id:"expr", ic:"💬", t:"عبارات يومية", m:"جمل يستخدمها المتحدث كل يوم", items:EXPR.map(e=>({en:e[0],ar:e[1]}))},
-   {id:"a", ic:"🔵", t:"جمل A1–A2", m:"قصيرة وواضحة للبداية", items:ex(["A1","A2"])},
-   {id:"b1", ic:"🟣", t:"جمل B1", m:"أمثلة الدروس ونصوص القراءة", items:ex(["B1"]).concat(rd(["B1"]))},
-   {id:"b2", ic:"🌹", t:"جمل B2–C1", m:"جمل أطول بتراكيب متقدمة", items:ex(["B2","C1"]).concat(rd(["B2","C1"]))},
-   {id:"voc", ic:"🗂️", t:"كلمات في سياق", m:"أمثلة المفردات كلها", items:VOCAB.flatMap(U=>U.w.map(w=>({en:w[3],ar:w[2]+" — "+w[0]})))},
-   {id:"dlg", ic:"🎧", t:"حوارات ومحاضرات", m:"من مقاطع الاستماع", items:LISTEN.flatMap(S=>sentSplit(S.script).map(s=>({en:stripSpeaker(s),ar:""})))}
+   {id:"expr", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>", t:"Everyday Expressions", m:"جمل يستخدمها المتحدث كل يوم", items:EXPR.map(e=>({en:e[0],ar:e[1]}))},
+   {id:"a", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>", t:"A1–A2 Sentences", m:"قصيرة وواضحة للبداية", items:ex(["A1","A2"])},
+   {id:"b1", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>", t:"B1 Sentences", m:"أمثلة الدروس ونصوص القراءة", items:ex(["B1"]).concat(rd(["B1"]))},
+   {id:"b2", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M9 3h6v3H9zM8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 14l2 2 4-4'/></svg>", t:"B2–C1 Sentences", m:"جمل أطول بتراكيب متقدمة", items:ex(["B2","C1"]).concat(rd(["B2","C1"]))},
+   {id:"voc", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2 2 7l10 5 10-5zM2 12l10 5 10-5M2 17l10 5 10-5'/></svg>", t:"Words in Context", m:"أمثلة المفردات كلها", items:VOCAB.flatMap(U=>U.w.map(w=>({en:w[3],ar:w[2]+" — "+w[0]})))},
+   {id:"dlg", ic:"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z'/></svg>", t:"Dialogues & Lectures", m:"من مقاطع الاستماع", items:LISTEN.flatMap(S=>sentSplit(S.script).map(s=>({en:stripSpeaker(s),ar:""})))}
   ];
 }
 
@@ -3937,15 +4202,15 @@ function scoreSpeech(target, heard){
 /* ---- الواجهة ---- */
 function renderShadow(){
   const v=$("#v-shadow"); v.innerHTML="";
-  v.appendChild(el("h2","title","Shadowing — تدريب النطق"));
+  v.appendChild(el("h2","title","Shadowing · Pronunciation Practice"));
   v.appendChild(el("p","sub","أسرع طريقة لتحسين النطق والطلاقة: تقليد المتحدث الأصلي جملة بجملة، ثم مقارنة نطقك بنطقه."));
   const how=el("div","grid"); how.style.marginBottom="18px";
-  [["1","استمعي","شغّلي الجملة ولاحظي التنغيم والوقفات"],["2","ظلّلي","كرري مع الصوت في نفس اللحظة — استخدمي «تكرار ×3»"],["3","قارني","انطقيها وحدك، والموقع يقيّم كل كلمة"]].forEach(([n,t,m])=>{
+  [["1","Listen","شغّلي الجملة ولاحظي التنغيم والوقفات"],["2","Shadow","كرري مع الصوت في نفس اللحظة — استخدمي «تكرار ×3»"],["3","Compare","انطقيها وحدك، والموقع يقيّم كل كلمة"]].forEach(([n,t,m])=>{
     const c=el("div","bdg"); c.appendChild(el("div","ic",n));
     const d=el("div"); d.appendChild(el("div","n",t)); d.appendChild(el("div","d",m)); c.appendChild(d); how.appendChild(c);
   });
   v.appendChild(how);
-  if(!SR_API) v.appendChild(el("div","note","ℹ️ متصفحك لا يدعم تقييم النطق الآلي. تقدرين تستمعين وتسجلين صوتك وتقارنين بنفسك. للتقييم الآلي استخدمي Chrome أو Safari الحديث."));
+  if(!SR_API) v.appendChild(el("div","note","ℹ متصفحك لا يدعم تقييم النطق الآلي. تقدرين تستمعين وتسجلين صوتك وتقارنين بنفسك. للتقييم الآلي استخدمي Chrome أو Safari الحديث."));
   const g=el("div","grid"); g.style.marginTop="16px";
   shadowTracks().forEach(T=>{
     const b=el("button","card");
@@ -3969,11 +4234,11 @@ function loopSpeak(text, times, btn){
   let k=0;
   btn.disabled=true;
   function one(){
-    if(k>=times){ btn.disabled=false; btn.textContent="🔁 تكرار ×3"; return; }
-    k++; btn.textContent="🔁 "+k+" من "+times;
+    if(k>=times){ btn.disabled=false; btn.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3'/></svg> تكرار ×3"; return; }
+    k++; btn.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3'/></svg> "+k+" من "+times;
     const u=new SpeechSynthesisUtterance(text); u.lang="en-US"; u.rate=TTS_RATE;
     u.onend=()=>setTimeout(one, 900 + text.split(" ").length*260);
-    u.onerror=()=>{ btn.disabled=false; btn.textContent="🔁 تكرار ×3"; };
+    u.onerror=()=>{ btn.disabled=false; btn.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3'/></svg> تكرار ×3"; };
     try{ speechSynthesis.speak(u); }catch(e){ btn.disabled=false; }
   }
   if(!ttsSupported()){ btn.disabled=false; return; }
@@ -3994,24 +4259,25 @@ function drawShadow(){
   v.appendChild(tm);
 
   const card=el("div","shcard");
-  const sent=el("div","shsent",it.en);  card.appendChild(sent);
+  const sent=el("div","shsent",it.en);
+  card.appendChild(sent);
   if(it.ar) card.appendChild(el("div","shar",it.ar));
-  const hide=el("button","btn ghost sm","🙈 إخفاء النص (تحدٍّ)");
-  hide.onclick=()=>{ sent.classList.toggle("blur"); hide.textContent = sent.classList.contains("blur")?"👁 إظهار النص":"🙈 إخفاء النص (تحدٍّ)"; };
+  const hide=el("button","btn ghost sm","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M3 3l18 18M10.6 5.2A9 9 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6A17 17 0 0 0 2 12s4 7 10 7c1.4 0 2.6-.3 3.7-.8'/></svg> إخفاء النص (تحدٍّ)");
+  hide.onclick=()=>{ sent.classList.toggle("blur"); hide.innerHTML = sent.classList.contains("blur")?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'/></svg> إظهار النص":"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M3 3l18 18M10.6 5.2A9 9 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6A17 17 0 0 0 2 12s4 7 10 7c1.4 0 2.6-.3 3.7-.8'/></svg> إخفاء النص (تحدٍّ)"; };
   card.appendChild(hide);
   v.appendChild(card);
 
-  v.appendChild(el("div","shstep","① استمعي"));
+  v.appendChild(el("div","shstep","1. Listen"));
   v.appendChild(makePlayer(it.en));
   const lp=el("div","row"); lp.style.justifyContent="center"; lp.style.marginBottom="14px";
-  const loop=el("button","btn ghost","🔁 تكرار ×3"); loop.onclick=()=>loopSpeak(it.en,3,loop);
+  const loop=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3'/></svg> تكرار ×3"); loop.onclick=()=>loopSpeak(it.en,3,loop);
   lp.appendChild(loop); lp.appendChild(el("span","m","كرري مع الصوت في نفس اللحظة"));
   v.appendChild(lp);
 
-  v.appendChild(el("div","shstep","② انطقي وقارني"));
+  v.appendChild(el("div","shstep","2. Speak & Compare"));
   const box=el("div","player");
   const res=el("div","shres");
-  const mic=el("button","pbig mic", SR_API?"🎙 انطقي الجملة الآن":"🎙 التقييم الآلي غير متاح");
+  const mic=el("button","pbig mic", SR_API?"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v4M8 22h8'/></svg> انطقي الجملة الآن":"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v4M8 22h8'/></svg> التقييم الآلي غير متاح");
   if(!SR_API) mic.disabled=true;
   const live=el("div","pstat","");
   const rowb=el("div","pbtns"); rowb.appendChild(mic);
@@ -4051,7 +4317,7 @@ function drawShadow(){
       live.textContent=msg;
     };
     rec.onend=()=>{
-      mic.disabled=false; mic.classList.remove("rec"); mic.textContent="🎙 حاولي مرة أخرى";
+      mic.disabled=false; mic.classList.remove("rec"); mic.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v4M8 22h8'/></svg> حاولي مرة أخرى";
       const cands=[];
       if(finals.length){
         const base=finals.map(a=>a[0]).join(" "); cands.push(base);
@@ -4063,7 +4329,7 @@ function drawShadow(){
       res.innerHTML="";
       const wr=el("div","shwords");
       best.words.forEach((w,i)=>wr.appendChild(el("span", best.wordOk[i]?"w ok":"w miss", w)));
-      const verdict = best.pct>=85?"ممتاز! نطق واضح 🌟":best.pct>=60?"جيد — ركّزي على الكلمات الحمراء":"حاولي مجددًا ببطء، واستمعي للكلمات الحمراء";
+      const verdict = best.pct>=85?"ممتاز! نطق واضح <svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'/></svg>":best.pct>=60?"جيد — ركّزي على الكلمات الحمراء":"حاولي مجددًا ببطء، واستمعي للكلمات الحمراء";
       const top=el("div","shscore");
       top.appendChild(el("b","num "+(best.pct>=85?"hi":best.pct>=60?"mid":"low"), best.pct+"%"));
       top.appendChild(el("span","",verdict));
@@ -4072,16 +4338,16 @@ function drawShadow(){
       wr.querySelectorAll(".w").forEach(sp=>sp.onclick=()=>speak(sp.textContent));
       finish(best.pct);
     };
-    try{ rec.start(); mic.disabled=true; mic.classList.add("rec"); mic.textContent="🔴 أستمع إليك…"; live.textContent="انطقي الجملة الآن"; }
+    try{ rec.start(); mic.disabled=true; mic.classList.add("rec"); mic.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z'/></svg> أستمع إليك…"; live.innerHTML="انطقي الجملة الآن"; }
     catch(e){ live.textContent="تعذّر تشغيل الميكروفون."; }
   };
   v.appendChild(box);
 
   /* تسجيل ومقارنة يدوية */
-  v.appendChild(el("div","shstep","③ سجّلي صوتك واسمعيه (اختياري)"));
+  v.appendChild(el("div","shstep","3. Record Yourself (optional)"));
   const rb=el("div","player");
   const rrow=el("div","pbtns");
-  const recb=el("button","pctl","⏺ سجّلي صوتك");
+  const recb=el("button","pctl","<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z'/></svg> سجّلي صوتك");
   const audio=document.createElement("audio"); audio.controls=true; audio.style.width="100%"; audio.hidden=true;
   const rstat=el("div","pstat","سجّلي نطقك ثم قارنيه بالنطق الصحيح");
   rrow.appendChild(recb); rb.appendChild(rrow); rb.appendChild(rstat); rb.appendChild(audio);
@@ -4099,16 +4365,16 @@ function drawShadow(){
         const blob=new Blob(chunks,{type:mr.mimeType||"audio/webm"});
         audio.src=URL.createObjectURL(blob); audio.hidden=false;
         stream.getTracks().forEach(t=>t.stop());
-        recb.textContent="⏺ سجّلي مرة أخرى"; recb.classList.remove("rec");
+        recb.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z'/></svg> سجّلي مرة أخرى"; recb.classList.remove("rec");
         rstat.textContent="استمعي لصوتك ثم للنطق الصحيح فوق وقارني";
         if(!SR_API && !scored){
           const sr=el("div","pbtns");
-          const good=el("button","pctl","✓ نطقي قريب"); const redo=el("button","pctl","↺ أحتاج أعيد");
+          const good=el("button","pctl","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg> نطقي قريب"); const redo=el("button","pctl","↺ أحتاج أعيد");
           good.onclick=()=>{ finish(80); sr.remove(); }; redo.onclick=()=>{ sr.remove(); };
           sr.appendChild(good); sr.appendChild(redo); rb.appendChild(sr);
         }
       };
-      mr.start(); recb.textContent="⏹ إيقاف التسجيل"; recb.classList.add("rec"); rstat.textContent="جاري التسجيل…";
+      mr.start(); recb.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor'><path d='M7 7h10v10H7z'/></svg> إيقاف التسجيل"; recb.classList.add("rec"); rstat.innerHTML="جاري التسجيل…";
       auto=setTimeout(()=>{ if(mr&&mr.state==="recording") mr.stop(); },15000);
     }catch(e){ rstat.textContent="لم نتمكن من الوصول للميكروفون — تأكدي من السماح به في المتصفح."; }
   };
@@ -4181,7 +4447,7 @@ function drawGate(){
       const r=el("button","profrow");
       r.appendChild(el("span","nm", pr.name+(pr.cls?" · "+pr.cls:"")));
       r.appendChild(el("span","xp",((pr.p&&pr.p.xp)||0)+" XP"));
-      const x=el("button","del","✕"); x.title="حذف";
+      const x=el("button","del","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M18 6 6 18M6 6l12 12'/></svg>"); x.title="حذف";
       x.onclick=(e)=>{ e.stopPropagation(); if(DB.current===id)DB.current=null; delete DB.profiles[id]; saveAll(DB); drawGate(); };
       r.appendChild(x);
       r.onclick=()=>applyProfile(id);
@@ -4214,7 +4480,7 @@ function buildReport(){
     return {n:keyName(k), p:Math.round(s.r/(s.r+s.w)*100), t:s.r+s.w};
   }).filter(o=>o.t>=3 && o.p<75).sort((x,y)=>x.p-y.p).slice(0,3);
   let d=""; try{ d=new Date().toLocaleDateString("ar-EG"); }catch(e){ d=new Date().toISOString().slice(0,10); }
-  return "📊 تقرير تقدّم — Teacher Huda\n"+
+  return "<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M5 20v-6M12 20V6M19 20v-10M3 20h18'/></svg> تقرير تقدّم — Teacher Huda\n"+
     "الاسم: "+pr.name+(pr.cls?"\nالصف: "+pr.cls:"")+"\n"+
     "التاريخ: "+d+"\n— — —\n"+
     "النقاط: "+state.xp+" XP\n"+
@@ -4229,7 +4495,7 @@ function buildReport(){
     "#TH|"+pr.name+"|"+(pr.cls||"-")+"|"+state.xp+"|"+state.answered+"|"+state.right+"|"+(state.bestStep||0)+"|"+weak.map(o=>o.n).join("؛")+"|"+(state.shCount?Math.round(state.shSum/state.shCount):0);
 }
 function copyText(txt, btn, label){
-  const done=()=>{ btn.textContent="✓ تم النسخ"; setTimeout(()=>btn.textContent=label,1600); };
+  const done=()=>{ btn.innerHTML="<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M20 6 9 17l-5-5'/></svg> تم النسخ"; setTimeout(()=>btn.innerHTML=label,1600); };
   if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done,()=>{});
   else { const t=document.createElement("textarea"); t.value=txt; document.body.appendChild(t); t.select();
     try{ document.execCommand("copy"); done(); }catch(e){} t.remove(); }
@@ -4237,35 +4503,46 @@ function copyText(txt, btn, label){
 function openReport(){
   const s=$("#sheetIn"); s.innerHTML="";
   const head=el("div","sheet-head");
-  head.appendChild(el("h2","title","تقريري للمعلمة"));
+  head.appendChild(el("h2","title","My Report"));
   const cl=el("button","btn ghost","إغلاق"); cl.onclick=closeSheet; head.appendChild(cl);
   s.appendChild(head);
   const txt=buildReport();
   s.appendChild(el("div","report",txt));
   const row=el("div","row");
-  const wa=el("button","btn mark","📲 إرسال عبر واتساب");
+  const wa=el("button","btn mark","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 2 11 13M22 2l-7 20-4-9-9-4z'/></svg> إرسال عبر واتساب");
   wa.onclick=()=>{ try{ window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank"); }catch(e){} };
-  const cp=el("button","btn ghost","📋 نسخ التقرير");
-  cp.onclick=()=>copyText(txt,cp,"📋 نسخ التقرير");
+  const cp=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 9h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg> نسخ التقرير");
+  cp.onclick=()=>copyText(txt,cp,"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 9h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg> نسخ التقرير");
   row.appendChild(wa); row.appendChild(cp); s.appendChild(row);
   s.appendChild(el("div","note","لا تحذفي السطر الأخير (#TH) — المعلمة تلصقه في لوحتها ليظهر تقدمك في جدول."));
   $("#sheet").classList.add("open");
 }
 
-/* ---- لوحة المعلمة ---- */
+/* ---- لوحة المعلمة: متابعة عبر تقارير الطالبات ---- */
 function openTeacher(){
   const s=$("#sheetIn"); s.innerHTML="";
   const head=el("div","sheet-head");
-  head.appendChild(el("h2","title","لوحة المعلمة"));
+  head.appendChild(el("h2","title","Teacher Dashboard"));
   const cl=el("button","btn ghost","إغلاق"); cl.onclick=closeSheet; head.appendChild(cl);
   s.appendChild(head);
-  s.appendChild(el("p","sub","الصقي تقارير الطالبات هنا (تقدرين تلصقين عدة تقارير مرة واحدة) وسيظهر جدول مرتب حسب الأداء."));
-  const ta=el("textarea","tarea"); ta.placeholder="الصقي التقارير هنا…\n#TH|نورة|٢/أ|450|60|48|72|الماضي التام";
+
+  const how=el("div","card"); how.style.marginBottom="16px";
+  how.appendChild(el("div","t","كيف تتابعين الطالبات؟"));
+  const ol=el("ol"); ol.style.cssText="padding-inline-start:20px;font-size:.86rem;line-height:2;color:var(--ink-700);margin:6px 0 0";
+  ["الطالبة تفتح My Progress وتضغط «<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M22 2 11 13M22 2l-7 20-4-9-9-4z'/></svg> أرسل تقريري للمعلمة» فيصلك تقريرها في الواتساب.",
+   "انسخي رسائل الطالبات والصقيها كلها هنا دفعة واحدة (السطر الذي يبدأ بـ #TH هو المهم).",
+   "اضغطي «اعرض الجدول» ليظهر ترتيب الفصل، أو «نسخ كـ CSV» للصقه في إكسل."].forEach(x=>ol.appendChild(el("li","",x)));
+  how.appendChild(ol);
+  s.appendChild(how);
+
+  const ta=el("textarea","tarea");
+  ta.placeholder="الصقي تقارير الطالبات هنا…\n#TH|نورة|٢/أ|450|60|48|72|الماضي التام|88\n#TH|سارة|٢/ب|300|50|30|60|المضارع التام|75";
   s.appendChild(ta);
   const row=el("div","row");
   const go2=el("button","btn mark","اعرض الجدول");
-  const cpv=el("button","btn ghost","📋 نسخ كـ CSV لإكسل");
-  row.appendChild(go2); row.appendChild(cpv); s.appendChild(row);
+  const cpv=el("button","btn ghost","<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 9h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg> نسخ كـ CSV لإكسل");
+  const clr=el("button","btn ghost","مسح");
+  row.appendChild(go2); row.appendChild(cpv); row.appendChild(clr); s.appendChild(row);
   const out=el("div"); out.style.marginTop="16px"; s.appendChild(out);
   let rows=[];
   function build(){
@@ -4276,16 +4553,17 @@ function openTeacher(){
         acc: answered?Math.round(right/answered*100):0, step:+p[5]||0, weak:p[6]||"—", sh:+p[7]||0};
     }).sort((x,y)=>y.xp-x.xp);
   }
+  clr.onclick=()=>{ ta.value=""; out.innerHTML=""; };
   go2.onclick=()=>{
     build(); out.innerHTML="";
-    if(!rows.length){ out.appendChild(el("div","note","ما لقيت أي سطر تقرير صالح. تأكدي أن السطر يبدأ بـ #TH|")); return; }
+    if(!rows.length){ out.appendChild(el("div","note","ما لقيت سطر تقرير صالح. تأكدي أن السطر يبدأ بـ #TH| — وهو موجود في آخر تقرير كل طالبة.")); return; }
     const t=el("table","tbl");
     const hr=el("tr"); ["الطالبة","الصف","XP","حُلّت","الدقة","ستيب","النطق","يحتاج تقوية"].forEach(x=>hr.appendChild(el("th","",x)));
     t.appendChild(hr);
     rows.forEach(r=>{
       const tr=el("tr");
       [r.name,r.cls,r.xp,r.answered,r.acc+"%",r.step||"—",r.sh?r.sh+"%":"—",r.weak].forEach((c,i)=>{
-        const td=el("td", (i>=2&&i<=6)?"num":"", String(c));
+        const td=el("td",(i>=2&&i<=6)?"num":"",String(c));
         if(i===4) td.style.color = r.acc>=70?"var(--ok)":r.acc>=40?"var(--mark-deep)":"var(--no)";
         tr.appendChild(td);
       });
@@ -4293,82 +4571,161 @@ function openTeacher(){
     });
     out.appendChild(t);
     const avg=Math.round(rows.reduce((x,r)=>x+r.acc,0)/rows.length);
-    out.appendChild(el("div","note","عدد التقارير: "+rows.length+" · متوسط الدقة: "+avg+"%"));
+    const tot=rows.reduce((x,r)=>x+r.answered,0);
+    out.appendChild(el("div","note","عدد التقارير: "+rows.length+" · متوسط دقة الفصل: "+avg+"% · مجموع الأسئلة المحلولة: "+tot));
   };
   cpv.onclick=()=>{
-    build();
-    if(!rows.length) return;
-    const csv="الطالبة,الصف,XP,الأسئلة,الصحيحة,الدقة,ستيب,النطق,يحتاج تقوية\n"+
-      rows.map(r=>[r.name,r.cls,r.xp,r.answered,r.right,r.acc+"%",r.step,r.sh+"%",r.weak].join(",")).join("\n");
-    copyText(csv,cpv,"📋 نسخ كـ CSV لإكسل");
+    build(); if(!rows.length){ go2.onclick(); return; }
+    copyText("الطالبة,الصف,XP,الأسئلة,الصحيحة,الدقة,ستيب,النطق,يحتاج تقوية\n"+
+      rows.map(r=>[r.name,r.cls,r.xp,r.answered,r.right,r.acc+"%",r.step,r.sh+"%",r.weak].join(",")).join("\n"),cpv,"<svg class='i' viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M11 9h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2zM5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg> نسخ كـ CSV لإكسل");
   };
   $("#sheet").classList.add("open");
 }
+
+/* ================= منتقي الثيم ================= */
+const PALETTES=[
+ {id:"bakery",   n:"Bakery Blush", ar:"قرمزي كريمي", c:["#7C1122","#A81E33","#FAEEDD"]},
+ {id:"midnight", n:"Midnight Ink", ar:"حبر الليل", c:["#0D1526","#1F2F52","#FFD54A"]},
+ {id:"plum",     n:"Plum Rose",    ar:"وردي عتيق", c:["#2A1028","#55214C","#F7A8C4"]},
+ {id:"violet",   n:"Violet Dawn",  ar:"بنفسج الفجر", c:["#1B1038","#392270","#FFB088"]},
+ {id:"emerald",  n:"Emerald Study",ar:"زمرد", c:["#072720","#125243","#F3C64E"]},
+ {id:"ocean",    n:"Deep Ocean",   ar:"محيط", c:["#062430","#0F4B5E","#FF9A76"]}
+];
+function applyPalette(id){
+  document.documentElement.dataset.palette=id;
+  try{ localStorage.setItem("th_palette",id); }catch(e){}
+  document.querySelectorAll(".pal").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.p===id)));
+}
+function buildPalBox(){
+  const box=$("#palBox"); box.innerHTML="";
+  box.appendChild(el("div","hd","اختاري الثيم"));
+  PALETTES.forEach(p=>{
+    const b=el("button","pal"); b.dataset.p=p.id;
+    const d=el("div","dots"); p.c.forEach(c=>{const i=el("i"); i.style.background=c; d.appendChild(i);});
+    b.appendChild(d);
+    const t=el("div"); t.style.flex="1";
+    t.appendChild(el("div","",p.n)); 
+    const s=el("div","",p.ar); s.style.cssText="font-size:.74rem;color:var(--ink-500)"; t.appendChild(s);
+    b.appendChild(t);
+    b.onclick=()=>{ applyPalette(p.id); };
+    box.appendChild(b);
+  });
+  let saved="bakery";
+  try{ saved=localStorage.getItem("th_palette")||"bakery"; }catch(e){}
+  applyPalette(saved);
+}
+$("#palBtn").onclick=(e)=>{ e.stopPropagation(); $("#palBox").classList.toggle("open"); };
+document.addEventListener("click",(e)=>{ if(!$("#palBox").contains(e.target) && e.target!==$("#palBtn")) $("#palBox").classList.remove("open"); });
+buildPalBox();
+
+
+/* ================= البحث العلوي وروابط التذييل ================= */
+function globalSearch(qy){
+  qy=qy.trim().toLowerCase(); if(qy.length<2) return [];
+  const out=[];
+  LESSONS.forEach(L=>{ if((L.t+" "+L.ta+" "+L.intro).toLowerCase().indexOf(qy)>-1)
+    out.push({t:L.t, s:"Lesson · "+L.ta+" · "+L.lvl, go:()=>{ go("lessons"); openLesson(L.id); }}); });
+  READING.forEach(R=>{ if((R.t+" "+R.ta).toLowerCase().indexOf(qy)>-1)
+    out.push({t:R.t, s:"Reading · "+R.ta+" · "+R.lvl, go:()=>{ go("read"); openReading(R.id); }}); });
+  LISTEN.forEach(S=>{ if((S.ta+" "+S.type+" "+S.script).toLowerCase().indexOf(qy)>-1)
+    out.push({t:S.ta, s:"Listening · "+S.type, go:()=>{ go("step"); openListen(S.id); }}); });
+  VOCAB.forEach(U=>{
+    if(U.t.toLowerCase().indexOf(qy)>-1 || U.ta.indexOf(qy)>-1) out.push({t:U.t, s:"Vocabulary unit · "+U.ta, go:()=>{ go("vocab"); openVocab(U.id); }});
+    U.w.forEach(w=>{ if(w[0].toLowerCase().indexOf(qy)>-1 || w[2].indexOf(qy)>-1)
+      out.push({t:w[0], s:"Word · "+w[2]+" · "+U.ta, go:()=>{ go("vocab"); openVocab(U.id); }}); });
+  });
+  return out.slice(0,12);
+}
+(function(){
+  const inp=$("#topSearch"), box=$("#searchRes");
+  if(!inp) return;
+  inp.oninput=()=>{
+    const res=globalSearch(inp.value);
+    box.innerHTML="";
+    if(!res.length){ box.classList.remove("open"); return; }
+    res.forEach(r=>{
+      const b=el("button","sres");
+      b.appendChild(el("b","",r.t)); b.appendChild(el("span","",r.s));
+      b.onclick=()=>{ box.classList.remove("open"); inp.value=""; r.go(); window.scrollTo(0,0); };
+      box.appendChild(b);
+    });
+    box.classList.add("open");
+  };
+  inp.onfocus=()=>{ if(box.children.length) box.classList.add("open"); };
+  document.addEventListener("click",e=>{ if(!box.contains(e.target)&&e.target!==inp) box.classList.remove("open"); });
+})();
+document.querySelectorAll("footer.site button").forEach(b=>{
+  b.onclick=()=>{
+    if(b.dataset.go){ go(b.dataset.go); window.scrollTo(0,0); return; }
+    const a=b.dataset.act;
+    if(a==="minute") startMinute();
+    else if(a==="review") openReview();
+    else if(a==="report") openReport();
+    else if(a==="switch") drawGate();
+    else if(a==="teacher") openTeacher();
+    else if(a==="worksheet") worksheet();
+    else if(a==="top") window.scrollTo(0,0);
+  };
+});
+const fc=$("#fCount"); if(fc) fc.textContent = drillTotal()+" تدريبًا · "+LESSONS.length+" درسًا · © Teacher Huda";
 
 if(DB.current && DB.profiles[DB.current]) applyProfile(DB.current);
 else { drawGate(); updateFab(); go("home"); }
 </script>
 
-<script id="teacherhuda-online">
+<script id="teacherhuda-online-v2">
 (function(){
- const API="https://teacherhuda-api.onrender.com";
- const $=s=>document.querySelector(s);
- async function studentRegister(name,cls){
-  try{
-   const r=await fetch(API+"/api/student/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,className:cls})});
-   if(!r.ok)return;
-   const x=await r.json(); localStorage.setItem("teacherhuda_student_token",x.token);
-  }catch(e){}
- }
- async function sync(){
-  const token=localStorage.getItem("teacherhuda_student_token");
-  if(!token || typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current])return;
-  try{
-   await fetch(API+"/api/student/progress",{method:"PUT",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify(DB.profiles[DB.current].p||{})});
-  }catch(e){}
- }
- async function restore(){
-  const token=localStorage.getItem("teacherhuda_student_token"); if(!token)return;
-  try{
-   const r=await fetch(API+"/api/student/me",{headers:{Authorization:"Bearer "+token}});
-   if(!r.ok)return; const x=await r.json(), s=x.student;
-   if(typeof DB==="undefined")return;
-   const id="online_"+s.id; DB.profiles[id]={name:s.name,cls:s.class_name||"",created:Date.now(),p:s.progress||null};
-   applyProfile(id);
-  }catch(e){}
- }
- document.addEventListener("click",function(e){
-  const b=e.target.closest("#gStart"); if(!b)return;
-  const n=$("#gName")?.value.trim()||"", c=$("#gClass")?.value.trim()||"";
-  if(n.length>=2)setTimeout(()=>studentRegister(n,c),100);
- },true);
- setInterval(sync,3000);
- setTimeout(restore,1200);
-
- async function teacherLogin(password){
-  const r=await fetch(API+"/api/teacher/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
-  if(!r.ok)throw new Error("login");
-  return (await r.json()).token;
- }
- window.openTeacherOnline=async function(){
-  let p=prompt("كلمة مرور المعلمة:");
-  if(p===null)return;
-  try{
-   const token=await teacherLogin(p); sessionStorage.setItem("teacher_api_token",token);
-   const r=await fetch(API+"/api/teacher/students",{headers:{Authorization:"Bearer "+token}});
-   const data=await r.json(), list=data.students||[];
-   let txt="\n\n📊 لوحة المعلمة\n\n";
-   txt+=list.map(s=>{
-    const p=s.progress||{}, q=+p.answered||0, right=+p.right||0;
-    return "• "+s.name+" | "+(s.class_name||"—")+" | "+(+p.xp||0)+" XP | الدقة "+(q?Math.round(right/q*100):0)+"% | آخر نشاط "+new Date(s.last_seen).toLocaleString("ar-SA");
-   }).join("\n");
-   alert(txt||"لا توجد طالبات مسجلات بعد.");
-  }catch(e){alert("تعذر الدخول. تأكدي من كلمة المرور وأن خدمة البيانات تعمل.");}
- };
- const tb=document.createElement("button"); tb.textContent="دخول المعلمة"; tb.type="button";
- tb.style.cssText="position:fixed;bottom:14px;left:14px;z-index:9999;border:0;border-radius:999px;padding:9px 13px;background:#111827;color:#fff;font-weight:700;cursor:pointer";
- tb.onclick=()=>window.openTeacherOnline(); document.addEventListener("DOMContentLoaded",()=>document.body.appendChild(tb));
+  const API = "https://teacherhuda-api.onrender.com";
+  const STUDENT_TOKEN_KEY = "teacherhuda_online_token_v2";
+  async function registerCurrent(){
+    try{
+      if(typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current]) return false;
+      const pr=DB.profiles[DB.current];
+      const token=pr.onlineToken||localStorage.getItem(STUDENT_TOKEN_KEY);
+      if(token){pr.onlineToken=token;return true;}
+      const r=await fetch(API+"/api/student/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:pr.name||"طالبة",className:pr.cls||""})});
+      if(!r.ok)return false;
+      const data=await r.json();pr.onlineToken=data.token;localStorage.setItem(STUDENT_TOKEN_KEY,data.token);try{saveAll(DB)}catch(e){}return true;
+    }catch(e){return false}
+  }
+  async function syncCurrent(){
+    try{
+      if(typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current]) return;
+      const token=DB.profiles[DB.current].onlineToken||localStorage.getItem(STUDENT_TOKEN_KEY); if(!token)return;
+      const progress=typeof snapshot==="function"?snapshot():(DB.profiles[DB.current].p||{});
+      await fetch(API+"/api/student/progress",{method:"PUT",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({progress})});
+    }catch(e){}
+  }
+  async function syncLoop(){if(await registerCurrent())await syncCurrent()}
+  async function teacherLogin(password){
+    const r=await fetch(API+"/api/teacher/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
+    if(!r.ok)throw new Error("login"); return (await r.json()).token;
+  }
+  async function showTeacherDashboard(){
+    let token=sessionStorage.getItem("teacher_api_token");
+    try{
+      if(!token){const p=prompt("كلمة مرور المعلمة:");if(p===null)return;token=await teacherLogin(p);sessionStorage.setItem("teacher_api_token",token)}
+      const r=await fetch(API+"/api/teacher/students",{headers:{Authorization:"Bearer "+token}});
+      if(r.status===401){sessionStorage.removeItem("teacher_api_token");alert("انتهت جلسة المعلمة، سجّلي الدخول مرة أخرى.");return}
+      if(!r.ok)throw new Error("students");
+      const data=await r.json(),list=Array.isArray(data.students)?data.students:[]; const s=$("#sheetIn");s.innerHTML="";
+      const head=el("div","sheet-head");head.appendChild(el("h2","title","لوحة المعلمة"));const close=el("button","btn ghost","إغلاق");close.onclick=closeSheet;head.appendChild(close);s.appendChild(head);
+      const actions=el("div","row");const refresh=el("button","btn mark","↻ تحديث");refresh.onclick=showTeacherDashboard;const logout=el("button","btn ghost","تسجيل خروج");logout.onclick=()=>{sessionStorage.removeItem("teacher_api_token");showTeacherDashboard()};actions.appendChild(refresh);actions.appendChild(logout);s.appendChild(actions);
+      if(!list.length)s.appendChild(el("div","note","لا توجد طالبات مسجلات بعد. عندما تدخل الطالبة باسمها من جوالها ستظهر هنا تلقائيًا."));
+      else{
+        const table=document.createElement("table");table.className="tbl";const hr=document.createElement("tr");["الطالبة","الصف","XP","الأسئلة","الدقة","الدروس","أفضل سلسلة","STEP","النطق","آخر نشاط"].forEach(h=>hr.appendChild(el("th","",h)));table.appendChild(hr);
+        list.forEach(st=>{const p=st.progress||{},q=Number(p.answered||0),right=Number(p.right||0),acc=q?Math.round(right/q*100):0,lessons=p.qdone&&typeof p.qdone==="object"?Object.values(p.qdone).filter(v=>v===true).length:0,tr=document.createElement("tr");
+          [st.name||"—",st.class_name||"—",Number(p.xp||0),q,acc+"%",lessons,Number(p.best||0),Number(p.bestStep||0),p.shCount?Math.round(Number(p.shSum||0)/Number(p.shCount))+"%":"—",st.last_seen?new Date(st.last_seen).toLocaleString("ar-SA"):"—"].forEach((v,i)=>tr.appendChild(el("td",i>=2&&i<=8?"num":"",String(v))));table.appendChild(tr)});
+        s.appendChild(table);s.appendChild(el("div","note","عدد الطالبات: "+list.length+" · البيانات متزامنة من الأجهزة المتصلة بالإنترنت."));
+      }
+      $("#sheet").classList.add("open");
+    }catch(e){sessionStorage.removeItem("teacher_api_token");alert("تعذر الاتصال بخدمة البيانات. تأكدي أن teacherhuda-api تعمل.")}
+  }
+  try{openTeacher=showTeacherDashboard}catch(e){}
+  window.showTeacherDashboard=showTeacherDashboard;
+  setTimeout(syncLoop,1200);setInterval(syncLoop,5000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncLoop()});
+  document.addEventListener("click",function(ev){const b=ev.target.closest("button");if(b&&b.dataset&&b.dataset.act==="teacher"){ev.preventDefault();ev.stopImmediatePropagation();showTeacherDashboard()}},true);
 })();
 </script>
-\n</body>
+</body>
 </html>
