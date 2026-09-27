@@ -4308,5 +4308,67 @@ function openTeacher(){
 if(DB.current && DB.profiles[DB.current]) applyProfile(DB.current);
 else { drawGate(); updateFab(); go("home"); }
 </script>
-</body>
+
+<script id="teacherhuda-online">
+(function(){
+ const API="https://teacherhuda-api.onrender.com";
+ const $=s=>document.querySelector(s);
+ async function studentRegister(name,cls){
+  try{
+   const r=await fetch(API+"/api/student/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,className:cls})});
+   if(!r.ok)return;
+   const x=await r.json(); localStorage.setItem("teacherhuda_student_token",x.token);
+  }catch(e){}
+ }
+ async function sync(){
+  const token=localStorage.getItem("teacherhuda_student_token");
+  if(!token || typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current])return;
+  try{
+   await fetch(API+"/api/student/progress",{method:"PUT",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify(DB.profiles[DB.current].p||{})});
+  }catch(e){}
+ }
+ async function restore(){
+  const token=localStorage.getItem("teacherhuda_student_token"); if(!token)return;
+  try{
+   const r=await fetch(API+"/api/student/me",{headers:{Authorization:"Bearer "+token}});
+   if(!r.ok)return; const x=await r.json(), s=x.student;
+   if(typeof DB==="undefined")return;
+   const id="online_"+s.id; DB.profiles[id]={name:s.name,cls:s.class_name||"",created:Date.now(),p:s.progress||null};
+   applyProfile(id);
+  }catch(e){}
+ }
+ document.addEventListener("click",function(e){
+  const b=e.target.closest("#gStart"); if(!b)return;
+  const n=$("#gName")?.value.trim()||"", c=$("#gClass")?.value.trim()||"";
+  if(n.length>=2)setTimeout(()=>studentRegister(n,c),100);
+ },true);
+ setInterval(sync,3000);
+ setTimeout(restore,1200);
+
+ async function teacherLogin(password){
+  const r=await fetch(API+"/api/teacher/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
+  if(!r.ok)throw new Error("login");
+  return (await r.json()).token;
+ }
+ window.openTeacherOnline=async function(){
+  let p=prompt("كلمة مرور المعلمة:");
+  if(p===null)return;
+  try{
+   const token=await teacherLogin(p); sessionStorage.setItem("teacher_api_token",token);
+   const r=await fetch(API+"/api/teacher/students",{headers:{Authorization:"Bearer "+token}});
+   const data=await r.json(), list=data.students||[];
+   let txt="\n\n📊 لوحة المعلمة\n\n";
+   txt+=list.map(s=>{
+    const p=s.progress||{}, q=+p.answered||0, right=+p.right||0;
+    return "• "+s.name+" | "+(s.class_name||"—")+" | "+(+p.xp||0)+" XP | الدقة "+(q?Math.round(right/q*100):0)+"% | آخر نشاط "+new Date(s.last_seen).toLocaleString("ar-SA");
+   }).join("\n");
+   alert(txt||"لا توجد طالبات مسجلات بعد.");
+  }catch(e){alert("تعذر الدخول. تأكدي من كلمة المرور وأن خدمة البيانات تعمل.");}
+ };
+ const tb=document.createElement("button"); tb.textContent="دخول المعلمة"; tb.type="button";
+ tb.style.cssText="position:fixed;bottom:14px;left:14px;z-index:9999;border:0;border-radius:999px;padding:9px 13px;background:#111827;color:#fff;font-weight:700;cursor:pointer";
+ tb.onclick=()=>window.openTeacherOnline(); document.addEventListener("DOMContentLoaded",()=>document.body.appendChild(tb));
+})();
+</script>
+\n</body>
 </html>
