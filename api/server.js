@@ -93,6 +93,20 @@ async function init() {
     CREATE UNIQUE INDEX IF NOT EXISTS students_name_class_unique
     ON students (lower(trim(name)), lower(trim(COALESCE(class_name, ''))))
   `);
+
+  // Keep multiple device tokens linked to the same student record.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS student_tokens (
+      token_hash TEXT PRIMARY KEY,
+      student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+  await pool.query(`
+    INSERT INTO student_tokens(token_hash, student_id)
+    SELECT token_hash, id FROM students
+    ON CONFLICT (token_hash) DO NOTHING
+  `);
 }
 function teacher(req,res,next) {
   const p=verify(req.headers.authorization?.replace(/^Bearer\s+/i,""));
@@ -122,6 +136,10 @@ app.post("/api/student/register",async(req,res)=>{
      RETURNING id,name,class_name,progress`,
     [tokenHash,name,className]
   );
+  await pool.query(
+    "INSERT INTO student_tokens(token_hash,student_id) VALUES($1,$2) ON CONFLICT(token_hash) DO UPDATE SET student_id=EXCLUDED.student_id",
+    [tokenHash,r.rows[0].id]
+  );
   res.json({
     token:sign({role:"student",tokenHash,exp:Date.now()+365*24*60*60*1000}),
     student:{id:r.rows[0].id,name:r.rows[0].name,className:r.rows[0].class_name,progress:r.rows[0].progress}
@@ -131,16 +149,17 @@ app.put("/api/student/progress",student,async(req,res)=>{
   const progress=req.body?.progress;
   if(!progress || typeof progress!=="object") return res.status(400).json({error:"بيانات التقدم غير صالحة"});
   const result=await pool.query(
-    `UPDATE students SET progress=$1::jsonb,last_seen=NOW()
-     WHERE token_hash=$2
-       AND COALESCE(NULLIF(progress->>'xp','')::numeric,0) <= $3
-       AND COALESCE(NULLIF(progress->>'answered','')::numeric,0) <= $4`,
+    `UPDATE students s SET progress=$1::jsonb,last_seen=NOW()
+     FROM student_tokens st
+     WHERE st.token_hash=$2 AND st.student_id=s.id
+       AND COALESCE(NULLIF(s.progress->>'xp','')::numeric,0) <= $3
+       AND COALESCE(NULLIF(s.progress->>'answered','')::numeric,0) <= $4`,
     [JSON.stringify(progress),req.tokenHash,Number(progress.xp)||0,Number(progress.answered)||0]
   );
   res.json({ok:result.rowCount>0,stale:result.rowCount===0});
 });
 app.get("/api/student/me",student,async(req,res)=>{
-  const r=await pool.query("SELECT id,name,class_name,progress,last_seen FROM students WHERE token_hash=$1",[req.tokenHash]);
+  const r=await pool.query("SELECT s.id,s.name,s.class_name,s.progress,s.last_seen FROM students s JOIN student_tokens st ON st.student_id=s.id WHERE st.token_hash=$1",[req.tokenHash]);
   if(!r.rowCount) return res.status(404).json({error:"الطالبة غير موجودة"});
   res.json({student:r.rows[0]});
 });
