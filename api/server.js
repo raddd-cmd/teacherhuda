@@ -36,6 +36,63 @@ async function init() {
     class_name TEXT DEFAULT '', progress JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), last_seen TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`);
+
+  // Merge old duplicate rows (same normalized student name + class) before enforcing uniqueness.
+  await pool.query(`
+    WITH ranked AS (
+      SELECT id,
+        lower(trim(name)) AS name_key,
+        lower(trim(COALESCE(class_name, ''))) AS class_key,
+        row_number() OVER (
+          PARTITION BY lower(trim(name)), lower(trim(COALESCE(class_name, '')))
+          ORDER BY
+            COALESCE(NULLIF(progress->>'xp','')::numeric,0) DESC,
+            COALESCE(NULLIF(progress->>'answered','')::numeric,0) DESC,
+            last_seen DESC, id ASC
+        ) AS rn
+      FROM students
+    ),
+    winners AS (
+      SELECT id, name_key, class_key FROM ranked WHERE rn = 1
+    ),
+    progress_items AS (
+      SELECT r.name_key, r.class_key, kv.key, kv.value,
+        row_number() OVER (
+          PARTITION BY r.name_key, r.class_key, kv.key
+          ORDER BY
+            COALESCE(NULLIF(s.progress->>'xp','')::numeric,0) DESC,
+            COALESCE(NULLIF(s.progress->>'answered','')::numeric,0) DESC,
+            s.last_seen DESC, s.id ASC
+        ) AS value_rank
+      FROM students s
+      JOIN ranked r ON r.id = s.id
+      CROSS JOIN LATERAL jsonb_each(
+        CASE WHEN jsonb_typeof(s.progress) = 'object' THEN s.progress ELSE '{}'::jsonb END
+      ) AS kv
+    ),
+    merged AS (
+      SELECT name_key, class_key, jsonb_object_agg(key, value) AS progress
+      FROM progress_items
+      WHERE value_rank = 1
+      GROUP BY name_key, class_key
+    ),
+    updated AS (
+      UPDATE students s
+      SET progress = m.progress
+      FROM merged m
+      JOIN winners w USING (name_key, class_key)
+      WHERE s.id = w.id
+      RETURNING s.id
+    )
+    DELETE FROM students s
+    USING ranked r
+    WHERE s.id = r.id AND r.rn > 1
+  `);
+
+  await pool.query(`
+    CREATE UNIQUE INDEX IF NOT EXISTS students_name_class_unique
+    ON students (lower(trim(name)), lower(trim(COALESCE(class_name, ''))))
+  `);
 }
 function teacher(req,res,next) {
   const p=verify(req.headers.authorization?.replace(/^Bearer\s+/i,""));
@@ -57,14 +114,30 @@ app.post("/api/student/register",async(req,res)=>{
   const name=String(req.body?.name||"").trim(), className=String(req.body?.className||"").trim();
   if(name.length<2) return res.status(400).json({error:"اسم الطالبة مطلوب"});
   const raw=randomToken(), tokenHash=hash(raw);
-  const r=await pool.query("INSERT INTO students(token_hash,name,class_name) VALUES($1,$2,$3) RETURNING id,name,class_name",[tokenHash,name,className]);
-  res.json({token:sign({role:"student",tokenHash,exp:Date.now()+365*24*60*60*1000}),student:{id:r.rows[0].id,name:r.rows[0].name,className:r.rows[0].class_name}});
+  const r=await pool.query(
+    `INSERT INTO students(token_hash,name,class_name) VALUES($1,$2,$3)
+     ON CONFLICT (lower(trim(name)), lower(trim(COALESCE(class_name, ''))))
+     DO UPDATE SET token_hash=EXCLUDED.token_hash, name=EXCLUDED.name,
+       class_name=EXCLUDED.class_name, last_seen=NOW()
+     RETURNING id,name,class_name,progress`,
+    [tokenHash,name,className]
+  );
+  res.json({
+    token:sign({role:"student",tokenHash,exp:Date.now()+365*24*60*60*1000}),
+    student:{id:r.rows[0].id,name:r.rows[0].name,className:r.rows[0].class_name,progress:r.rows[0].progress}
+  });
 });
 app.put("/api/student/progress",student,async(req,res)=>{
   const progress=req.body?.progress;
   if(!progress || typeof progress!=="object") return res.status(400).json({error:"بيانات التقدم غير صالحة"});
-  await pool.query("UPDATE students SET progress=$1::jsonb,last_seen=NOW() WHERE token_hash=$2",[JSON.stringify(progress),req.tokenHash]);
-  res.json({ok:true});
+  const result=await pool.query(
+    `UPDATE students SET progress=$1::jsonb,last_seen=NOW()
+     WHERE token_hash=$2
+       AND COALESCE(NULLIF(progress->>'xp','')::numeric,0) <= $3
+       AND COALESCE(NULLIF(progress->>'answered','')::numeric,0) <= $4`,
+    [JSON.stringify(progress),req.tokenHash,Number(progress.xp)||0,Number(progress.answered)||0]
+  );
+  res.json({ok:result.rowCount>0,stale:result.rowCount===0});
 });
 app.get("/api/student/me",student,async(req,res)=>{
   const r=await pool.query("SELECT id,name,class_name,progress,last_seen FROM students WHERE token_hash=$1",[req.tokenHash]);
