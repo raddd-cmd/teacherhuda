@@ -4680,20 +4680,71 @@ else { drawGate(); updateFab(); go("home"); }
   async function registerCurrent(){
     try{
       if(typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current]) return false;
-      const pr=DB.profiles[DB.current];
-      const token=pr.onlineToken||localStorage.getItem(STUDENT_TOKEN_KEY);
-      if(token){pr.onlineToken=token;return true;}
-      const r=await fetch(API+"/api/student/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:pr.name||"طالبة",className:pr.cls||""})});
+      const id=DB.current, pr=DB.profiles[id];
+      if(pr.onlineToken) return true;
+
+      // Migrate an older browser-wide token only if it belongs to this exact student.
+      const legacy=localStorage.getItem(STUDENT_TOKEN_KEY);
+      if(legacy){
+        try{
+          const mr=await fetch(API+"/api/student/me",{headers:{Authorization:"Bearer "+legacy}});
+          if(mr.ok){
+            const md=await mr.json(), remote=md.student||{};
+            const norm=v=>String(v||"").trim().toLocaleLowerCase();
+            if(norm(remote.name)===norm(pr.name) && norm(remote.class_name)===norm(pr.cls)){
+              pr.onlineToken=legacy;
+              localStorage.removeItem(STUDENT_TOKEN_KEY);
+              try{saveAll(DB)}catch(e){}
+              return true;
+            }
+          }
+        }catch(e){}
+        localStorage.removeItem(STUDENT_TOKEN_KEY);
+      }
+
+      const r=await fetch(API+"/api/student/register",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({name:pr.name||"طالبة",className:pr.cls||""})
+      });
       if(!r.ok)return false;
-      const data=await r.json();pr.onlineToken=data.token;localStorage.setItem(STUDENT_TOKEN_KEY,data.token);try{saveAll(DB)}catch(e){}return true;
+      const data=await r.json();
+      pr.onlineToken=data.token;
+      const remote=data.student&&data.student.progress;
+      const local= (DB.current===id && typeof snapshot==="function") ? snapshot() : (pr.p||{});
+      const remoteXp=Number(remote&&remote.xp)||0, localXp=Number(local.xp)||0;
+      const remoteAnswered=Number(remote&&remote.answered)||0, localAnswered=Number(local.answered)||0;
+      if(remote && (remoteXp>localXp || remoteAnswered>localAnswered)){
+        pr.p=remote;
+        try{saveAll(DB)}catch(e){}
+        if(DB.current===id && typeof applyProfile==="function") applyProfile(id);
+      }else{
+        try{saveAll(DB)}catch(e){}
+      }
+      return true;
     }catch(e){return false}
   }
   async function syncCurrent(){
     try{
       if(typeof DB==="undefined" || !DB.current || !DB.profiles[DB.current]) return;
-      const token=DB.profiles[DB.current].onlineToken||localStorage.getItem(STUDENT_TOKEN_KEY); if(!token)return;
-      const progress=typeof snapshot==="function"?snapshot():(DB.profiles[DB.current].p||{});
-      await fetch(API+"/api/student/progress",{method:"PUT",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({progress})});
+      const id=DB.current, pr=DB.profiles[id];
+      if(!pr.onlineToken && !(await registerCurrent())) return;
+      const send=async token=>fetch(API+"/api/student/progress",{
+        method:"PUT",
+        headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
+        body:JSON.stringify({progress:typeof snapshot==="function"?snapshot():(pr.p||{})})
+      });
+      let response=await send(pr.onlineToken);
+      if(response.status===401){
+        delete pr.onlineToken;
+        try{saveAll(DB)}catch(e){}
+        if(!(await registerCurrent())) return;
+        response=await send(pr.onlineToken);
+      }
+      if(response.ok){
+        const result=await response.json();
+        // Older local progress should not overwrite better server-side progress.
+        if(result.stale && pr.p) pr.p=pr.p;
+      }
     }catch(e){}
   }
   async function syncLoop(){if(await registerCurrent())await syncCurrent()}
