@@ -156,6 +156,10 @@ app.put("/api/student/progress",student,async(req,res)=>{
        AND COALESCE(NULLIF(s.progress->>'answered','')::numeric,0) <= $4`,
     [JSON.stringify(progress),req.tokenHash,Number(progress.xp)||0,Number(progress.answered)||0]
   );
+  if (!result.rowCount) {
+    const tokenRow=await pool.query("SELECT 1 FROM student_tokens WHERE token_hash=$1",[req.tokenHash]);
+    if (!tokenRow.rowCount) return res.status(401).json({error:"انتهت جلسة الطالبة"});
+  }
   res.json({ok:result.rowCount>0,stale:result.rowCount===0});
 });
 app.get("/api/student/me",student,async(req,res)=>{
