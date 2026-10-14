@@ -38,12 +38,12 @@ async function init() {
   )`);
 }
 function teacher(req,res,next) {
-  const p=verify(req.headers.authorization?.replace(/^Bearer\\s+/i,""));
+  const p=verify(req.headers.authorization?.replace(/^Bearer\s+/i,""));
   if(!p || p.role!=="teacher") return res.status(401).json({error:"غير مصرح"});
   next();
 }
 function student(req,res,next) {
-  const p=verify(req.headers.authorization?.replace(/^Bearer\\s+/i,""));
+  const p=verify(req.headers.authorization?.replace(/^Bearer\s+/i,""));
   if(!p || p.role!=="student" || !p.tokenHash) return res.status(401).json({error:"جلسة الطالبة غير صالحة"});
   req.tokenHash=p.tokenHash; next();
 }
